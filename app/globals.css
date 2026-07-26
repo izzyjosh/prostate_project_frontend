@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+:root {
+  --navy: #1B2A4A;
+  --navy-mid: #243557;
+  --navy-light: #2E4270;
+  --teal: #0E8C75;
+  --teal-light: #12A98E;
+  --teal-dim: rgba(14, 140, 117, 0.12);
+  --sand: #F5F0E8;
+  --sand-dark: #EDE7D9;
+  --amber: #D4882A;
+  --amber-dim: rgba(212, 136, 42, 0.12);
+  --danger: #C0392B;
+  --danger-dim: rgba(192, 57, 43, 0.10);
+  --success: #1A7A54;
+  --success-dim: rgba(26, 122, 84, 0.10);
+  --text: #1B2A4A;
+  --text-mid: #4A5568;
+  --text-muted: #8896A8;
+  --border: #D8E0EC;
+  --radius-card: 10px;
+  --radius-card-lg: 16px;
+  --shadow-card: 0 2px 20px rgba(27, 42, 74, 0.08);
+  --shadow-card-lg: 0 8px 40px rgba(27, 42, 74, 0.14);
+}
+
+@theme inline {
+  --color-navy: var(--navy);
+  --color-navy-mid: var(--navy-mid);
+  --color-navy-light: var(--navy-light);
+  --color-teal: var(--teal);
+  --color-teal-light: var(--teal-light);
+  --color-teal-dim: var(--teal-dim);
+  --color-sand: var(--sand);
+  --color-sand-dark: var(--sand-dark);
+  --color-amber: var(--amber);
+  --color-amber-dim: var(--amber-dim);
+  --color-danger: var(--danger);
+  --color-danger-dim: var(--danger-dim);
+  --color-success: var(--success);
+  --color-success-dim: var(--success-dim);
+  --color-ink: var(--text);
+  --color-ink-mid: var(--text-mid);
+  --color-ink-muted: var(--text-muted);
+  --color-border: var(--border);
+
+  --radius-card: var(--radius-card);
+  --radius-card-lg: var(--radius-card-lg);
+
+  --shadow-card: var(--shadow-card);
+  --shadow-card-lg: var(--shadow-card-lg);
+
+  --font-display: var(--font-dm-serif-display);
+  --font-sans: var(--font-inter);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--sand);
+  color: var(--text);
+  font-family: var(--font-sans), sans-serif;
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display), serif;
+  font-weight: 400;
+}
