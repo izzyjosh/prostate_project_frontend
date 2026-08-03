@@ -63,7 +63,9 @@ export default function Home() {
           <h1 className="mb-5 text-[clamp(2.4rem,4.5vw,3.8rem)] leading-[1.08] text-white">
             Prostate Cancer
             <br />
-            <em className="text-teal-light not-italic italic">Pre-Assessment</em>
+            <em className="text-teal-light not-italic italic">
+              Pre-Assessment
+            </em>
             <br />
             Made Precise.
           </h1>
@@ -77,7 +79,10 @@ export default function Home() {
               Begin Pre-Assessment
             </Button>
             <Button variant="outline-lg" href="/login">
-              Clinician Login →
+              Login →
+            </Button>
+            <Button variant="outline-lg" href="/register/clinician">
+              Register as Clinician
             </Button>
           </div>
           <p className="max-w-[400px] text-[0.72rem] leading-[1.5] text-white/30">
@@ -161,8 +166,8 @@ export default function Home() {
           <span>ABUTH ProstateCare CDSS</span>
         </div>
         <p className="text-[0.72rem] text-white/30">
-          Final Year Project · Ahmadu Bello University Teaching Hospital,
-          Zaria, Kaduna State · 2026
+          Final Year Project · Ahmadu Bello University Teaching Hospital, Zaria,
+          Kaduna State · 2026
         </p>
       </footer>
     </>

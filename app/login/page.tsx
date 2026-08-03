@@ -6,29 +6,55 @@ import Link from "next/link";
 import AuthCard from "@/components/AuthCard";
 import Alert from "@/components/Alert";
 import Button from "@/components/Button";
-import { FormInput, FormSelect } from "@/components/FormField";
-import { login, ROLE_ROUTES, Role } from "@/lib/auth";
+import { FormInput } from "@/components/FormField";
+import { ApiError, authApiClient } from "@/lib/api";
 
 export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState<Role | "">("");
-  const [alert, setAlert] = useState<{ message: string; type: "error" | "success" } | null>(
-    null
-  );
+  const [alert, setAlert] = useState<{
+    message: string;
+    type: "error" | "success";
+  } | null>(null);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const result = login(email, password, role);
-    if ("error" in result) {
-      setAlert({ message: result.error, type: "error" });
+
+    if (!email || !password) {
+      setAlert({ message: "Please fill in all fields.", type: "error" });
       return;
     }
-    setAlert({ message: "Login successful! Redirecting...", type: "success" });
-    setTimeout(() => {
-      router.push(ROLE_ROUTES[result.user.role]);
-    }, 900);
+
+    try {
+      await authApiClient.login(email, password);
+
+      const currentUser = await authApiClient.getCurrentUser();
+
+      const route =
+        currentUser.role === "clinician"
+          ? "/doctor-dashboard"
+          : currentUser.role === "admin"
+            ? "/admin-dashboard"
+            : "/patient-dashboard";
+
+      router.replace(route);
+    } catch (error) {
+      const message =
+        error instanceof ApiError
+          ? error.message || "Unable to sign in. Please try again."
+          : error instanceof Error
+            ? error.message
+            : "Unable to sign in. Please try again.";
+
+      setAlert({
+        message,
+        type: "error",
+      });
+      return;
+    }
+
+    
   }
 
   return (
@@ -55,17 +81,6 @@ export default function LoginPage() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <FormSelect
-          id="role"
-          label="Sign in as"
-          value={role}
-          onChange={(e) => setRole(e.target.value as Role | "")}
-        >
-          <option value="">Select your role...</option>
-          <option value="patient">Patient</option>
-          <option value="doctor">Doctor / Clinician</option>
-          <option value="admin">Administrator</option>
-        </FormSelect>
         <Button variant="primary" full type="submit">
           Sign In →
         </Button>
@@ -74,6 +89,12 @@ export default function LoginPage() {
         New patient?{" "}
         <Link href="/register" className="font-semibold text-teal">
           Create an account
+        </Link>
+      </p>
+      <p className="mt-2 text-center text-[0.8rem] text-ink-muted">
+        Clinician?{" "}
+        <Link href="/register/clinician" className="font-semibold text-teal">
+          Register here
         </Link>
       </p>
     </AuthCard>

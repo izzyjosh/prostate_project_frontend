@@ -30,6 +30,7 @@ interface ButtonProps {
   href?: string;
   full?: boolean;
   small?: boolean;
+  disabled?: boolean;
   type?: "button" | "submit";
   onClick?: () => void;
   children: ReactNode;
@@ -40,6 +41,7 @@ export default function Button({
   href,
   full,
   small,
+  disabled,
   type = "button",
   onClick,
   children,
@@ -49,6 +51,7 @@ export default function Button({
     variantClasses[variant],
     full ? "w-full justify-center" : "",
     small ? "px-3.5 py-1.5 text-xs" : "",
+    disabled ? "cursor-not-allowed opacity-60" : "",
   ]
     .filter(Boolean)
     .join(" ");
@@ -62,7 +65,12 @@ export default function Button({
   }
 
   return (
-    <button type={type} onClick={onClick} className={classes}>
+    <button
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
+      className={classes}
+    >
       {children}
     </button>
   );

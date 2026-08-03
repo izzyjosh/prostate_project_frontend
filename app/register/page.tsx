@@ -6,8 +6,13 @@ import Link from "next/link";
 import AuthCard from "@/components/AuthCard";
 import Alert from "@/components/Alert";
 import Button from "@/components/Button";
-import { FormInput, FormSelect, FormRow2, FormSectionTitle } from "@/components/FormField";
-import { register } from "@/lib/auth";
+import {
+  FormInput,
+  FormSelect,
+  FormRow2,
+  FormSectionTitle,
+} from "@/components/FormField";
+import { authApiClient } from "@/lib/api";
 
 const BLOOD_GROUPS = ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"];
 
@@ -26,22 +31,77 @@ export default function RegisterPage() {
     password: "",
     confirm: "",
   });
-  const [alert, setAlert] = useState<{ message: string; type: "error" | "success" } | null>(
-    null
-  );
+  const [alert, setAlert] = useState<{
+    message: string;
+    type: "error" | "success";
+  } | null>(null);
 
   function update<K extends keyof typeof form>(key: K, value: string) {
     setForm((f) => ({ ...f, [key]: value }));
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const result = register(form);
-    if ("error" in result) {
-      setAlert({ message: result.error, type: "error" });
+
+    if (
+      !form.fname ||
+      !form.lname ||
+      !form.dob ||
+      !form.phone ||
+      !form.email ||
+      !form.password ||
+      !form.confirm
+    ) {
+      setAlert({ message: "Please fill all required fields.", type: "error" });
       return;
     }
-    setAlert({ message: "Account created successfully! You can now sign in.", type: "success" });
+
+    if (form.password.length < 8) {
+      setAlert({
+        message: "Password must be at least 8 characters.",
+        type: "error",
+      });
+      return;
+    }
+
+    if (form.password !== form.confirm) {
+      setAlert({ message: "Passwords do not match.", type: "error" });
+      return;
+    }
+
+    const knownConditions = form.conditions
+      .split(",")
+      .map((condition) => condition.trim())
+      .filter(Boolean);
+
+    try {
+      await authApiClient.register({
+        firstName: form.fname,
+        lastName: form.lname,
+        dateOfBirth: form.dob,
+        phoneNumber: form.phone,
+        address: form.address,
+        occupation: form.occupation || undefined,
+        bloodGroup: form.bloodGroup || undefined,
+        knownConditions: knownConditions.length ? knownConditions : undefined,
+        email: form.email,
+        password: form.password,
+      });
+    } catch (error) {
+      setAlert({
+        message:
+          error instanceof Error
+            ? error.message
+            : "Unable to create account. Please try again.",
+        type: "error",
+      });
+      return;
+    }
+
+    setAlert({
+      message: "Account created successfully! You can now sign in.",
+      type: "success",
+    });
     setTimeout(() => {
       router.push("/login");
     }, 1400);
@@ -163,6 +223,12 @@ export default function RegisterPage() {
         Already registered?{" "}
         <Link href="/login" className="font-semibold text-teal">
           Sign in
+        </Link>
+      </p>
+      <p className="mt-2 text-center text-[0.8rem] text-ink-muted">
+        Clinician?{" "}
+        <Link href="/register/clinician" className="font-semibold text-teal">
+          Register here
         </Link>
       </p>
     </AuthCard>
