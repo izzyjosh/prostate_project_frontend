@@ -7,7 +7,7 @@ export default function BrandMark({ small = false }: { small?: boolean }) {
           : "flex h-[38px] w-[38px] flex-shrink-0 items-center justify-center rounded-[10px] bg-gradient-to-br from-teal to-teal-light font-display text-xl text-white"
       }
     >
-      A
+      P
     </div>
   );
 }

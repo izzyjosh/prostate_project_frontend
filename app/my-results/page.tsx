@@ -115,10 +115,10 @@ export default function MyResultsPage() {
             </div>
             <div className="p-6">
               <div className="mb-2 text-[0.75rem] font-bold uppercase tracking-[0.06em] text-ink-muted">
-                CDSS Recommendation
+                Recommendation
               </div>
               <p className="mb-4 text-[0.85rem] text-ink-mid">
-                {a.tier.recommendation}
+                {a.automaticRecommendation || a.tier.recommendation}
               </p>
               {a.status === "confirmed" ? (
                 <div className="rounded-lg border-l-[3px] border-teal bg-teal-dim p-4">
@@ -129,9 +129,10 @@ export default function MyResultsPage() {
                     <strong>Clinical Impression:</strong>{" "}
                     {a.confirmedDiagnosis || "—"}
                   </div>
-                  {a.prescription && (
+                  {a.doctorRecommendation && (
                     <div className="mt-1.5 text-[0.85rem] text-ink">
-                      <strong>Prescription:</strong> {a.prescription}
+                      <strong>Additional Recommendation:</strong>{" "}
+                      {a.doctorRecommendation}
                     </div>
                   )}
                   {a.doctorNotes && (

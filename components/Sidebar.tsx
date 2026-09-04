@@ -35,7 +35,7 @@ const NAV_CONFIG: Record<NavRole, RoleConfig> = {
           { href: "/patient-dashboard", icon: "🏠", label: "Dashboard" },
           { href: "/pre-assessment", icon: "📋", label: "Pre-Assessment" },
           { href: "/my-results", icon: "📊", label: "My Results" },
-          { href: "/my-prescriptions", icon: "💊", label: "Prescriptions" },
+          { href: "/my-prescriptions", icon: "💡", label: "Recommendations" },
         ],
       },
       {
@@ -53,7 +53,7 @@ const NAV_CONFIG: Record<NavRole, RoleConfig> = {
           { href: "/doctor-dashboard", icon: "🏠", label: "Dashboard" },
           { href: "/pending-reviews", icon: "⏳", label: "Pending Reviews" },
           { href: "/all-patients", icon: "👥", label: "All Patients" },
-          { href: "/prescriptions", icon: "💊", label: "Prescriptions" },
+          { href: "/prescriptions", icon: "💡", label: "Recommendations" },
         ],
       },
       {
@@ -123,7 +123,7 @@ export default function Sidebar({ active }: { active: string }) {
         <BrandMark small />
         <div className="flex flex-col">
           <span className="font-display text-[0.95rem] text-white">
-            ProstateCare
+            Prostatecare
           </span>
           <span className="text-[0.6rem] text-white/45">{config.tagline}</span>
         </div>

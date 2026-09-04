@@ -88,8 +88,8 @@ export default function MyPrescriptionsPage() {
   return (
     <DashboardShell
       active="/my-prescriptions"
-      title="My Prescriptions"
-      subtitle="Medications and clinical guidance issued by your doctor at ABUTH"
+      title="My Recommendations"
+      subtitle="Automatic assessment guidance and recommendations issued by your doctor"
       action={
         prescriptions.length > 0 ? (
           <Button variant="secondary" onClick={() => window.print()}>
@@ -104,11 +104,11 @@ export default function MyPrescriptionsPage() {
         <div className="rounded-card-lg border border-border bg-white p-12 text-center shadow-card">
           <div className="mb-3 text-4xl">💊</div>
           <h3 className="mb-2 font-display text-[1.3rem] text-navy">
-            No prescriptions yet
+            No recommendations yet
           </h3>
           <p className="mb-5 text-ink-muted">
-            Once a clinician reviews one of your pre-assessments and issues a
-            prescription, it will appear here.
+            Recommendations will appear here after you complete an assessment or
+            a clinician reviews it.
           </p>
           <Button variant="primary" href="/my-results">
             View my results →
@@ -118,9 +118,9 @@ export default function MyPrescriptionsPage() {
         <>
           <div className="mb-6 grid grid-cols-1 gap-5 sm:grid-cols-3 print:hidden">
             <StatCard
-              label="Prescriptions"
+              label="Recommendations"
               value={String(prescriptions.length)}
-              sub="Issued by your doctor"
+              sub="Automatic and clinician guidance"
             />
             <StatCard
               label="Most Recent"
@@ -152,7 +152,7 @@ export default function MyPrescriptionsPage() {
 
           <Alert
             type="info"
-            message="Take medication exactly as prescribed. Do not stop, change the dose, or share your medication. Contact ABUTH Urology if you experience any adverse reaction."
+            message="This guidance supports, but does not replace, a clinician's assessment. Contact a clinician if your symptoms worsen or you develop new symptoms."
           />
 
           <div className="flex flex-col gap-5">
@@ -174,7 +174,7 @@ export default function MyPrescriptionsPage() {
                       )}
                     </div>
                     <div className="font-display text-[1.2rem] text-navy">
-                      Prescription
+                      Recommendation
                     </div>
                     <div className="mt-[3px] text-[0.75rem] text-ink-muted">
                       Issued:{" "}
@@ -198,20 +198,21 @@ export default function MyPrescriptionsPage() {
                 </div>
 
                 <div className="p-6">
-                  <div className="mb-4 rounded-lg border-l-[3px] border-teal bg-teal-dim p-4">
-                    <div className="mb-1 text-[0.68rem] font-bold uppercase tracking-[0.06em] text-teal">
-                      Medication / Prescription
-                    </div>
-                    <div className="whitespace-pre-line text-[0.9rem] font-semibold text-ink">
-                      {p.prescription}
-                    </div>
-                  </div>
-
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    <Field
+                      label="Recommendation"
+                      value={p.automaticRecommendation || p.tier.recommendation}
+                    />
                     <Field
                       label="Clinical Impression"
                       value={p.confirmedDiagnosis || "—"}
                     />
+                    {p.doctorRecommendation && (
+                      <Field
+                        label="Additional Recommendation"
+                        value={p.doctorRecommendation}
+                      />
+                    )}
                     {p.doctorNotes && (
                       <Field label="Doctor's Notes" value={p.doctorNotes} />
                     )}

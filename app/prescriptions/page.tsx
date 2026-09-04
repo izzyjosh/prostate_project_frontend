@@ -50,8 +50,8 @@ export default function PrescriptionsPage() {
   return (
     <DashboardShell
       active="/prescriptions"
-      title="Prescriptions"
-      subtitle="Medications and clinical guidance issued across all patients"
+      title="Recommendations"
+      subtitle="Automatic assessment guidance and clinician recommendations across all patients"
     >
       {error && <Alert type="error" message={error} />}
 
@@ -59,10 +59,10 @@ export default function PrescriptionsPage() {
         <div className="rounded-card-lg border border-border bg-white p-12 text-center shadow-card">
           <div className="mb-3 text-4xl">💊</div>
           <h3 className="mb-2 font-display text-[1.3rem] text-navy">
-            No prescriptions issued yet
+            No recommendations issued yet
           </h3>
           <p className="text-ink-muted">
-            Prescriptions will appear here after a clinician review is
+            Recommendations will appear here after a clinician review is
             submitted.
           </p>
         </div>
@@ -90,6 +90,24 @@ export default function PrescriptionsPage() {
               <div className="p-6">
                 <div className="mb-3">
                   <div className="mb-1 text-[0.68rem] font-bold uppercase tracking-[0.06em] text-ink-muted">
+                    Recommendation
+                  </div>
+                  <div className="text-[0.85rem] text-ink">
+                    {a.automaticRecommendation || a.tier.recommendation}
+                  </div>
+                </div>
+                {a.doctorRecommendation && (
+                  <div className="mb-3">
+                    <div className="mb-1 text-[0.68rem] font-bold uppercase tracking-[0.06em] text-ink-muted">
+                      Additional Recommendation
+                    </div>
+                    <div className="text-[0.85rem] text-ink">
+                      {a.doctorRecommendation}
+                    </div>
+                  </div>
+                )}
+                <div className="mb-3">
+                  <div className="mb-1 text-[0.68rem] font-bold uppercase tracking-[0.06em] text-ink-muted">
                     Patient Email
                   </div>
                   <div className="text-[0.85rem] text-ink">
@@ -102,14 +120,6 @@ export default function PrescriptionsPage() {
                   </div>
                   <div className="text-[0.85rem] text-ink">
                     {a.confirmedDiagnosis || "—"}
-                  </div>
-                </div>
-                <div className="mb-3">
-                  <div className="mb-1 text-[0.68rem] font-bold uppercase tracking-[0.06em] text-ink-muted">
-                    Medications / Prescription
-                  </div>
-                  <div className="text-[0.85rem] text-ink">
-                    {a.prescription || "—"}
                   </div>
                 </div>
                 {a.doctorNotes && (

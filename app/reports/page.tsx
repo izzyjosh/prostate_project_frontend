@@ -39,7 +39,12 @@ const TIER_META: Record<
     bar: "bg-amber",
     text: "text-amber",
   },
-  low: { label: "Low Risk", icon: "🟢", bar: "bg-success", text: "text-success" },
+  low: {
+    label: "Low Risk",
+    icon: "🟢",
+    bar: "bg-success",
+    text: "text-success",
+  },
 };
 
 const TIER_ORDER: TierKey[] = ["urgent", "high", "moderate", "low"];
@@ -124,9 +129,7 @@ function Panel({
     <div className="break-inside-avoid rounded-card-lg border border-border bg-white shadow-card">
       <div className="border-b border-border px-6 py-[18px]">
         <h3 className="text-[0.95rem] font-bold text-navy">{title}</h3>
-        {hint && (
-          <p className="mt-0.5 text-[0.72rem] text-ink-muted">{hint}</p>
-        )}
+        {hint && <p className="mt-0.5 text-[0.72rem] text-ink-muted">{hint}</p>}
       </div>
       <div className="p-6">{children}</div>
     </div>
@@ -251,7 +254,7 @@ export default function ReportsPage() {
   const total = all.length;
   const reviewRate =
     total > 0 ? Math.round((reviewed.length / total) * 100) : 0;
-  const prescribed = reviewed.filter((a) => a.prescription).length;
+  const recommended = reviewed.length;
   const urgentBacklog = pending.filter(
     (a) => a.tier.tier === "urgent" || a.tier.tier === "high",
   );
@@ -311,9 +314,9 @@ export default function ReportsPage() {
               accentColor="teal"
             />
             <StatCard
-              label="Prescriptions Issued"
-              value={String(prescribed)}
-              sub={`${reviewed.length - prescribed} reviews without medication`}
+              label="Recommendations Issued"
+              value={String(recommended)}
+              sub={`${reviewed.filter((a) => a.doctorRecommendation).length} include extra clinician guidance`}
             />
             <StatCard
               label="Avg. Turnaround"

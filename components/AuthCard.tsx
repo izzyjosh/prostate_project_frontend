@@ -25,7 +25,9 @@ export default function AuthCard({
         <div className="mb-7 text-center">
           <div className="mb-1.5 flex items-center justify-center gap-2.5">
             <BrandMark />
-            <span className="font-display text-[1.3rem] text-navy">ABUTH ProstateCare</span>
+            <span className="font-display text-[1.3rem] text-navy">
+              Prostatecare
+            </span>
           </div>
           <span className="text-[0.75rem] text-teal">{tagline}</span>
         </div>

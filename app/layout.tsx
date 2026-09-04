@@ -16,7 +16,7 @@ const dmSerifDisplay = DM_Serif_Display({
 });
 
 export const metadata: Metadata = {
-  title: "ABUTH ProstateCare — Clinical Decision Support System",
+  title: "Prostatecare — Clinical Decision Support System",
   description:
     "A web-based platform that captures patient symptoms, evaluates risk factors, and equips clinicians with structured decision support — before the consultation begins.",
 };
@@ -28,7 +28,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${dmSerifDisplay.variable} antialiased`}>
+      <body
+        className={`${inter.variable} ${dmSerifDisplay.variable} antialiased`}
+      >
         {children}
       </body>
     </html>

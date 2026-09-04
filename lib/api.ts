@@ -53,12 +53,13 @@ export interface PatientAssessmentResponse {
     recommendation: string;
     urgency: string;
   };
+  automaticRecommendation: string | null;
   breakdown: Record<string, number>;
   selectedIds: string[];
   timestamp: string;
   status: "pending" | "confirmed";
+  doctorRecommendation: string | null;
   doctorNotes: string | null;
-  prescription: string | null;
   reviewedAt: string | null;
   confirmedDiagnosis: string | null;
   followupDate: string | null;
@@ -525,6 +526,7 @@ export class AuthApiClient extends BaseApiClient {
       recommendation: string;
       urgency: string;
     };
+    automaticRecommendation?: string;
     breakdown: Record<string, number>;
     selectedIds: string[];
     patientName?: string;
@@ -570,7 +572,7 @@ export class AuthApiClient extends BaseApiClient {
     assessmentId: string,
     body: {
       diagnosis: string;
-      prescription?: string;
+      recommendation?: string;
       notes?: string;
       followupDate?: string;
       urgency: "Routine" | "Priority" | "Urgent";
@@ -595,7 +597,9 @@ export class AuthApiClient extends BaseApiClient {
   }
 
   public suspendUser(userId: string) {
-    return this.patch<AdminActionResponse>(`/api/admin/users/${userId}/suspend`);
+    return this.patch<AdminActionResponse>(
+      `/api/admin/users/${userId}/suspend`,
+    );
   }
 
   public activateUser(userId: string) {

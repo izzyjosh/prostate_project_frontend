@@ -76,7 +76,7 @@ export default function DoctorDashboardPage() {
     <DashboardShell
       active="/doctor-dashboard"
       title="Clinician Dashboard"
-      subtitle="ABUTH Urology / Oncology — Prostate Cancer CDSS"
+      subtitle="Prostatecare — Urology / Oncology"
       action={
         <span className="text-[0.78rem] text-ink-muted">{todayLabel}</span>
       }
@@ -214,7 +214,7 @@ export default function DoctorDashboardPage() {
                   "Date Reviewed",
                   "Risk Tier",
                   "Confirmed Diagnosis",
-                  "Prescription",
+                  "Additional Recommendation",
                 ].map((h) => (
                   <th
                     key={h}
@@ -254,7 +254,7 @@ export default function DoctorDashboardPage() {
                       {a.confirmedDiagnosis || "—"}
                     </td>
                     <td className="px-4 py-3.5 text-[0.8rem]">
-                      {a.prescription ? "Issued" : "—"}
+                      {a.doctorRecommendation || "—"}
                     </td>
                   </tr>
                 ))

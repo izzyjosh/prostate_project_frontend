@@ -75,6 +75,7 @@ export default function PreAssessmentPage() {
           recommendation: r.tier.recommendation,
           urgency: r.tier.urgency,
         },
+        automaticRecommendation: r.automaticRecommendation,
       })
       .then(() => {
         setResult(r);
@@ -84,7 +85,8 @@ export default function PreAssessmentPage() {
       .catch((submitError) => {
         setError(
           submitError instanceof Error
-            ? submitError.message || "Unable to submit assessment. Please try again."
+            ? submitError.message ||
+                "Unable to submit assessment. Please try again."
             : "Unable to submit assessment. Please try again.",
         );
       })

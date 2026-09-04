@@ -75,7 +75,7 @@ export default function AdminDashboardPage() {
     <DashboardShell
       active="/admin-dashboard"
       title="Admin Dashboard"
-      subtitle="ABUTH ProstateCare CDSS — System Overview"
+      subtitle="Prostatecare — System Overview"
       action={
         <span className="text-[0.78rem] text-ink-muted">{todayLabel}</span>
       }
@@ -102,7 +102,7 @@ export default function AdminDashboardPage() {
         <StatCard
           label="Pending Reviews"
           value={String(stats.pendingReviews)}
-          sub={`${stats.prescriptionsIssued} prescriptions issued`}
+          sub={`${stats.prescriptionsIssued} reviewed recommendations`}
           accentColor="amber"
         />
       </div>

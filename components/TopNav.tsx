@@ -8,7 +8,7 @@ export default function TopNav() {
         <BrandMark />
         <div className="flex flex-col">
           <span className="font-display text-[1.1rem] leading-none text-white">
-            ABUTH ProstateCare
+            Prostatecare
           </span>
           <span className="mt-0.5 text-[0.68rem] tracking-wide text-white/45">
             Clinical Decision Support System

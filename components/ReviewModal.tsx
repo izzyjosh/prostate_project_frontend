@@ -36,7 +36,7 @@ export default function ReviewModal({
   onSubmitted: () => void;
 }) {
   const [diagnosis, setDiagnosis] = useState("");
-  const [medication, setMedication] = useState("");
+  const [recommendation, setRecommendation] = useState("");
   const [notes, setNotes] = useState("");
   const [followup, setFollowup] = useState(defaultFollowup());
   const [urgency, setUrgency] = useState<"Routine" | "Priority" | "Urgent">(
@@ -64,7 +64,7 @@ export default function ReviewModal({
     try {
       await authApiClient.reviewClinicianAssessment(record.id, {
         diagnosis,
-        prescription: medication.trim() || undefined,
+        recommendation: recommendation.trim() || undefined,
         notes: notes.trim() || undefined,
         followupDate: followup,
         urgency,
@@ -149,15 +149,24 @@ export default function ReviewModal({
           ))}
         </FormSelect>
 
+        <div className="mb-4 rounded-lg border-l-[3px] border-teal bg-teal-dim p-4">
+          <div className="mb-1 text-[0.68rem] font-bold uppercase tracking-[0.06em] text-teal">
+            Recommendation
+          </div>
+          <div className="text-[0.85rem] text-ink">
+            {record.automaticRecommendation || record.tier.recommendation}
+          </div>
+        </div>
+
         <div className="mb-4">
           <label className="mb-1.5 block text-[0.78rem] font-semibold tracking-wide text-ink">
-            Medications / Prescription
+            Additional Recommendation
           </label>
           <textarea
             rows={3}
-            value={medication}
-            onChange={(e) => setMedication(e.target.value)}
-            placeholder="e.g. Tamsulosin 0.4mg — Once daily at bedtime for 3 months"
+            value={recommendation}
+            onChange={(e) => setRecommendation(e.target.value)}
+            placeholder="Add clinician-approved guidance, tests, referrals, or follow-up instructions."
             className="w-full resize-y rounded-lg border-[1.5px] border-border bg-sand px-3.5 py-2.5 text-[0.9rem] text-ink transition-colors duration-200 focus:border-teal focus:bg-white focus:outline-none"
           />
         </div>
@@ -212,7 +221,7 @@ export default function ReviewModal({
           >
             {submitting
               ? "Submitting..."
-              : "Submit Review &amp; Issue Prescription"}
+              : "Submit Review & Save Recommendation"}
           </Button>
         </div>
       </div>

@@ -10,31 +10,47 @@ const BOX_CLASSES: Record<string, string> = {
 
 export default function RiskResult({ result }: { result: CDSSResult }) {
   const t = result.tier;
-  const groupEntries = Object.entries(KNOWLEDGE_BASE) as [GroupKey, (typeof KNOWLEDGE_BASE)[GroupKey]][];
-  const matchedByGroup: Record<GroupKey, (typeof KNOWLEDGE_BASE)[GroupKey]["questions"]> = {
+  const groupEntries = Object.entries(KNOWLEDGE_BASE) as [
+    GroupKey,
+    (typeof KNOWLEDGE_BASE)[GroupKey],
+  ][];
+  const matchedByGroup: Record<
+    GroupKey,
+    (typeof KNOWLEDGE_BASE)[GroupKey]["questions"]
+  > = {
     groupA: [],
     groupB: [],
     groupC: [],
     groupD: [],
   };
   groupEntries.forEach(([gk, g]) => {
-    matchedByGroup[gk] = g.questions.filter((q) => result.selectedIds.includes(q.id));
+    matchedByGroup[gk] = g.questions.filter((q) =>
+      result.selectedIds.includes(q.id),
+    );
   });
 
   return (
     <>
-      <div className={`mb-6 rounded-card-lg border-2 p-7 ${BOX_CLASSES[t.bgClass]}`}>
+      <div
+        className={`mb-6 rounded-card-lg border-2 p-7 ${BOX_CLASSES[t.bgClass]}`}
+      >
         <div
           className="mb-1.5 text-[0.68rem] font-bold uppercase tracking-[0.1em]"
           style={{ color: t.color }}
         >
           {t.icon} RISK CLASSIFICATION
         </div>
-        <div className="mb-2 font-display text-[1.6rem]" style={{ color: t.color }}>
+        <div
+          className="mb-2 font-display text-[1.6rem]"
+          style={{ color: t.color }}
+        >
           {t.label} Risk
         </div>
         <div className="my-3.5 flex items-baseline gap-1">
-          <div className="text-5xl font-bold leading-none" style={{ color: t.color }}>
+          <div
+            className="text-5xl font-bold leading-none"
+            style={{ color: t.color }}
+          >
             {result.percentage}%
           </div>
           <div className="text-[0.8rem] text-ink-muted">
@@ -47,23 +63,40 @@ export default function RiskResult({ result }: { result: CDSSResult }) {
             className="mb-1 text-[0.68rem] font-bold uppercase tracking-[0.08em]"
             style={{ color: t.color }}
           >
-            Recommended Action
+            Recommendation
           </div>
-          <div className="text-[0.875rem] text-ink">{t.recommendation}</div>
-          <div className="mt-2 text-[0.72rem] font-bold" style={{ color: t.color }}>
+          <div className="text-[0.875rem] text-ink">
+            {result.automaticRecommendation}
+          </div>
+          <div className="mt-3 border-t border-black/10 pt-3">
+            <div
+              className="mb-1 text-[0.68rem] font-bold uppercase tracking-[0.08em]"
+              style={{ color: t.color }}
+            >
+              Risk-tier guidance
+            </div>
+            <div className="text-[0.875rem] text-ink">{t.recommendation}</div>
+          </div>
+          <div
+            className="mt-2 text-[0.72rem] font-bold"
+            style={{ color: t.color }}
+          >
             ⏱ {t.urgency}
           </div>
         </div>
         <p className="mt-3 text-[0.72rem] italic text-ink-muted">
-          This preliminary assessment is based on self-reported symptoms only. A clinician at
-          ABUTH will review your responses before any clinical decision is made. This system does
-          not replace physical examination, PSA testing, or professional medical judgement.
+          This preliminary assessment is based on self-reported symptoms only. A
+          clinician at ABUTH will review your responses before any clinical
+          decision is made. This system does not replace physical examination,
+          PSA testing, or professional medical judgement.
         </p>
       </div>
 
       <div className="mb-5 rounded-card-lg border border-border bg-white shadow-card">
         <div className="border-b border-border px-6 py-[18px]">
-          <h3 className="text-[0.95rem] font-bold text-navy">Symptom Breakdown by Group</h3>
+          <h3 className="text-[0.95rem] font-bold text-navy">
+            Symptom Breakdown by Group
+          </h3>
         </div>
         <div className="p-6">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -106,7 +139,7 @@ export default function RiskResult({ result }: { result: CDSSResult }) {
                       </div>
                     ))}
                   </div>
-                ) : null
+                ) : null,
               )}
             </div>
           )}

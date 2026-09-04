@@ -45,8 +45,8 @@ const stages = [
   },
   {
     num: "04",
-    title: "Prescription & Records",
-    body: "The doctor confirms diagnosis, issues an electronic prescription, and all records are securely stored.",
+    title: "Recommendations & Records",
+    body: "The system provides assessment guidance, while clinicians add recommendations and securely store the complete record.",
   },
 ];
 
@@ -138,7 +138,7 @@ export default function Home() {
           How it works
         </div>
         <h2 className="mb-11 max-w-[500px] text-[clamp(1.8rem,3vw,2.6rem)] leading-tight text-navy">
-          Four stages from registration to prescription
+          Four stages from registration to clinical recommendation
         </h2>
         <div className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-6">
           {stages.map((stage) => (
@@ -163,7 +163,7 @@ export default function Home() {
       <footer className="flex flex-col items-center gap-2 bg-navy px-[5%] py-7 text-center">
         <div className="flex items-center gap-2.5 text-sm font-semibold text-white/70">
           <BrandMark small />
-          <span>ABUTH ProstateCare CDSS</span>
+          <span>Prostatecare</span>
         </div>
         <p className="text-[0.72rem] text-white/30">
           Final Year Project · Ahmadu Bello University Teaching Hospital, Zaria,

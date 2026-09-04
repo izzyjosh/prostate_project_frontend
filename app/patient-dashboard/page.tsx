@@ -75,9 +75,9 @@ export default function PatientDashboardPage() {
           small
         />
         <StatCard
-          label="Prescriptions"
+          label="Recommendations"
           value={String(dashboard.stats.prescriptions)}
-          sub="Issued by doctor"
+          sub="Automatic and clinician guidance"
         />
         <StatCard
           label="Last Assessment"
