@@ -163,17 +163,16 @@ export function getApiErrorMessage(
   error: unknown,
   fallback = "Something went wrong. Please try again.",
 ): string {
-  if (!(error instanceof ApiError)) {
-    if (error instanceof Error && error.message.trim()) {
-      return error.message;
-    }
-
-    return fallback;
+  if (error instanceof ApiError) {
+    const responseMessage = getErrorMessage(error.data, "");
+    return responseMessage || error.message || fallback;
   }
 
-  if (error.message.trim()) {
-    return error.message;
+  if (error instanceof TypeError && /fetch|network/i.test(error.message)) {
+    return "Unable to reach the server. Check your internet connection and try again.";
   }
+
+  if (error instanceof Error && error.message.trim()) return error.message;
 
   return fallback;
 }
@@ -194,10 +193,22 @@ function getErrorMessage(data: unknown, fallback: string): string {
     }
 
     if (Array.isArray(message) && message.length > 0) {
-      const firstMessage = message[0];
-      if (typeof firstMessage === "string" && firstMessage.trim()) {
-        return firstMessage;
+      const messages = message.filter(
+        (item): item is string =>
+          typeof item === "string" && item.trim().length > 0,
+      );
+      if (messages.length > 0) {
+        return messages.join(" ");
       }
+    }
+
+    const nestedError = data.error;
+    if (typeof nestedError === "string" && nestedError.trim()) {
+      return nestedError;
+    }
+
+    if (isPlainObject(nestedError)) {
+      return getErrorMessage(nestedError, fallback);
     }
   }
 

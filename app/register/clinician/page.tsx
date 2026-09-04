@@ -7,7 +7,7 @@ import AuthCard from "@/components/AuthCard";
 import Alert from "@/components/Alert";
 import Button from "@/components/Button";
 import { FormInput, FormRow2, FormSectionTitle } from "@/components/FormField";
-import { authApiClient } from "@/lib/api";
+import { authApiClient, getApiErrorMessage } from "@/lib/api";
 
 export default function ClinicianRegisterPage() {
   const router = useRouter();
@@ -70,10 +70,10 @@ export default function ClinicianRegisterPage() {
       });
     } catch (error) {
       setAlert({
-        message:
-          error instanceof Error
-            ? error.message
-            : "Unable to create account. Please try again.",
+        message: getApiErrorMessage(
+          error,
+          "Unable to create your clinician account. Check the details and try again.",
+        ),
         type: "error",
       });
       return;

@@ -7,7 +7,7 @@ import AuthCard from "@/components/AuthCard";
 import Alert from "@/components/Alert";
 import Button from "@/components/Button";
 import { FormInput } from "@/components/FormField";
-import { ApiError, authApiClient } from "@/lib/api";
+import { authApiClient, getApiErrorMessage } from "@/lib/api";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -40,21 +40,15 @@ export default function LoginPage() {
 
       router.replace(route);
     } catch (error) {
-      const message =
-        error instanceof ApiError
-          ? error.message || "Unable to sign in. Please try again."
-          : error instanceof Error
-            ? error.message
-            : "Unable to sign in. Please try again.";
-
       setAlert({
-        message,
+        message: getApiErrorMessage(
+          error,
+          "Unable to sign in. Check your email and password and try again.",
+        ),
         type: "error",
       });
       return;
     }
-
-    
   }
 
   return (

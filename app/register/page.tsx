@@ -12,7 +12,7 @@ import {
   FormRow2,
   FormSectionTitle,
 } from "@/components/FormField";
-import { authApiClient } from "@/lib/api";
+import { authApiClient, getApiErrorMessage } from "@/lib/api";
 
 const BLOOD_GROUPS = ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"];
 
@@ -89,10 +89,10 @@ export default function RegisterPage() {
       });
     } catch (error) {
       setAlert({
-        message:
-          error instanceof Error
-            ? error.message
-            : "Unable to create account. Please try again.",
+        message: getApiErrorMessage(
+          error,
+          "Unable to create your account. Check the details and try again.",
+        ),
         type: "error",
       });
       return;
