@@ -87,24 +87,24 @@ export default function DoctorDashboardPage() {
         <StatCard
           label="Pending Reviews"
           value={String(stats.pendingReviews)}
-          sub="Require attention"
+          sub="Submitted assessments waiting for your review"
           accentColor="amber"
         />
         <StatCard
           label="Total Assessments"
           value={String(stats.totalAssessments)}
-          sub=""
+          sub="All patient assessments submitted to the system"
         />
         <StatCard
           label="Urgent Cases"
           value={String(stats.urgentCases)}
-          sub="High/Urgent tier"
+          sub="Pending assessments rated High Risk or Urgent"
           accentColor="danger"
         />
         <StatCard
           label="Reviewed Today"
           value={String(stats.reviewedToday)}
-          sub=""
+          sub="Assessments you completed since midnight"
           accentColor="teal"
         />
       </div>
