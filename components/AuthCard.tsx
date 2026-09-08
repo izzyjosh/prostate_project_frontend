@@ -16,7 +16,7 @@ export default function AuthCard({
   children: ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-navy px-5 py-10">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-sand px-5 py-10">
       <div
         className={`w-full rounded-card-lg bg-white p-10 shadow-card-lg ${
           wide ? "max-w-[540px]" : "max-w-[460px]"
@@ -37,7 +37,7 @@ export default function AuthCard({
       </div>
       <Link
         href="/"
-        className="mt-[18px] inline-flex items-center gap-1.5 text-[0.78rem] text-white/40 transition-colors hover:text-white/70"
+        className="mt-[18px] inline-flex items-center gap-1.5 text-[0.78rem] text-ink-muted transition-colors hover:text-navy"
       >
         ← Back to Home
       </Link>

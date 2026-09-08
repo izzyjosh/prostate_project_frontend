@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import AuthCard from "@/components/AuthCard";
 import Alert from "@/components/Alert";
@@ -17,7 +16,6 @@ import { authApiClient, getApiErrorMessage } from "@/lib/api";
 const BLOOD_GROUPS = ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"];
 
 export default function RegisterPage() {
-  const router = useRouter();
   const [form, setForm] = useState({
     fname: "",
     lname: "",
@@ -99,12 +97,10 @@ export default function RegisterPage() {
     }
 
     setAlert({
-      message: "Account created successfully! You can now sign in.",
+      message:
+        "Account created successfully. A verification email has been sent to you. Please check your inbox and click the verification link before signing in.",
       type: "success",
     });
-    setTimeout(() => {
-      router.push("/login");
-    }, 1400);
   }
 
   return (

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import AuthCard from "@/components/AuthCard";
 import Alert from "@/components/Alert";
@@ -10,7 +9,6 @@ import { FormInput, FormRow2, FormSectionTitle } from "@/components/FormField";
 import { authApiClient, getApiErrorMessage } from "@/lib/api";
 
 export default function ClinicianRegisterPage() {
-  const router = useRouter();
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -81,12 +79,9 @@ export default function ClinicianRegisterPage() {
 
     setAlert({
       message:
-        "Registration received. Your account will be reviewed before activation.",
+        "Registration received. A verification email has been sent to you. Please verify your email; your account will then be reviewed before activation.",
       type: "success",
     });
-    setTimeout(() => {
-      router.push("/login");
-    }, 1600);
   }
 
   return (

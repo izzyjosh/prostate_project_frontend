@@ -11,7 +11,6 @@ type NavRole = "patient" | "doctor" | "admin";
 
 interface NavItem {
   href: string;
-  icon: string;
   label: string;
 }
 
@@ -32,15 +31,15 @@ const NAV_CONFIG: Record<NavRole, RoleConfig> = {
       {
         label: "Main",
         items: [
-          { href: "/patient-dashboard", icon: "🏠", label: "Dashboard" },
-          { href: "/pre-assessment", icon: "📋", label: "Pre-Assessment" },
-          { href: "/my-results", icon: "📊", label: "My Results" },
-          { href: "/my-prescriptions", icon: "💡", label: "Recommendations" },
+          { href: "/patient-dashboard", label: "Dashboard" },
+          { href: "/pre-assessment", label: "Pre-Assessment" },
+          { href: "/my-results", label: "My Results" },
+          { href: "/my-prescriptions", label: "Recommendations" },
         ],
       },
       {
         label: "Account",
-        items: [{ href: "/profile", icon: "👤", label: "My Profile" }],
+        items: [{ href: "/profile", label: "My Profile" }],
       },
     ],
   },
@@ -50,15 +49,15 @@ const NAV_CONFIG: Record<NavRole, RoleConfig> = {
       {
         label: "Clinic",
         items: [
-          { href: "/doctor-dashboard", icon: "🏠", label: "Dashboard" },
-          { href: "/pending-reviews", icon: "⏳", label: "Pending Reviews" },
-          { href: "/all-patients", icon: "👥", label: "All Patients" },
-          { href: "/prescriptions", icon: "💡", label: "Recommendations" },
+          { href: "/doctor-dashboard", label: "Dashboard" },
+          { href: "/pending-reviews", label: "Pending Reviews" },
+          { href: "/all-patients", label: "All Patients" },
+          { href: "/prescriptions", label: "Recommendations" },
         ],
       },
       {
         label: "Reports",
-        items: [{ href: "/reports", icon: "📊", label: "Clinical Reports" }],
+        items: [{ href: "/reports", label: "Clinical Reports" }],
       },
     ],
   },
@@ -67,7 +66,7 @@ const NAV_CONFIG: Record<NavRole, RoleConfig> = {
     sections: [
       {
         label: "System",
-        items: [{ href: "/admin-dashboard", icon: "🏠", label: "Dashboard" }],
+        items: [{ href: "/admin-dashboard", label: "Dashboard" }],
       },
     ],
   },
@@ -118,21 +117,21 @@ export default function Sidebar({ active }: { active: string }) {
   const config = NAV_CONFIG[role as NavRole];
 
   return (
-    <aside className="fixed left-0 top-0 z-50 flex h-screen w-[250px] flex-shrink-0 flex-col bg-navy">
-      <div className="flex items-center gap-2.5 border-b border-white/[0.07] px-[22px] pb-[18px] pt-5">
+    <aside className="fixed left-0 top-0 z-50 flex h-screen w-[250px] flex-shrink-0 flex-col border-r border-border bg-white">
+      <div className="flex items-center gap-2.5 border-b border-border px-[22px] pb-[18px] pt-5">
         <BrandMark small />
         <div className="flex flex-col">
-          <span className="font-display text-[0.95rem] text-white">
+          <span className="font-display text-[0.95rem] text-navy">
             Prostatecare
           </span>
-          <span className="text-[0.6rem] text-white/45">{config.tagline}</span>
+          <span className="text-[0.6rem] text-ink-muted">{config.tagline}</span>
         </div>
       </div>
 
       <nav className="flex-1 overflow-y-auto py-3">
         {config.sections.map((section) => (
           <div key={section.label}>
-            <div className="px-[22px] pb-1.5 pt-3.5 text-[0.6rem] font-bold uppercase tracking-[0.1em] text-white/25">
+            <div className="px-[22px] pb-1.5 pt-3.5 text-[0.6rem] font-bold uppercase tracking-[0.1em] text-ink-muted">
               {section.label}
             </div>
             {section.items.map((item) => (
@@ -141,11 +140,10 @@ export default function Sidebar({ active }: { active: string }) {
                 href={item.href}
                 className={`flex items-center gap-[11px] border-l-[3px] px-[22px] py-[11px] text-[0.85rem] font-medium transition-all duration-150 ${
                   active === item.href
-                    ? "border-teal bg-teal-dim text-white"
-                    : "border-transparent text-white/55 hover:bg-white/[0.04] hover:text-white/85"
+                    ? "border-teal bg-teal-dim text-navy"
+                    : "border-transparent text-ink-mid hover:bg-sand hover:text-navy"
                 }`}
               >
-                <span className="w-5 text-center text-base">{item.icon}</span>
                 {item.label}
               </Link>
             ))}
@@ -153,16 +151,16 @@ export default function Sidebar({ active }: { active: string }) {
         ))}
       </nav>
 
-      <div className="border-t border-white/[0.07] px-[22px] py-4">
+      <div className="border-t border-border px-[22px] py-4">
         <div className="flex items-center gap-2.5">
           <div className="flex h-[34px] w-[34px] flex-shrink-0 items-center justify-center rounded-full border border-teal bg-teal-dim text-[0.85rem] font-bold text-teal-light">
             {userInitials()}
           </div>
           <div className="min-w-0 flex-1">
-            <div className="truncate text-[0.82rem] font-semibold text-white">
+            <div className="truncate text-[0.82rem] font-semibold text-navy">
               {userDisplayName()}
             </div>
-            <div className="text-[0.65rem] text-white/35">
+            <div className="text-[0.65rem] text-ink-muted">
               {user
                 ? user.role === "clinician"
                   ? "Clinician"
@@ -173,7 +171,7 @@ export default function Sidebar({ active }: { active: string }) {
         </div>
         <button
           onClick={handleLogout}
-          className="mt-2 text-[0.72rem] text-white/30 transition-colors hover:text-white/60"
+          className="mt-2 text-[0.72rem] text-ink-muted transition-colors hover:text-navy"
         >
           Sign out →
         </button>
