@@ -47,7 +47,7 @@ export default function PatientDashboardPage() {
     <DashboardShell
       active="/patient-dashboard"
       title={`Welcome, ${dashboard.profile.firstName}`}
-      subtitle="Your prostate health pre-assessment portal — ABUTH, Zaria"
+      subtitle="Your prostate health pre-assessment portal"
       action={
         <Button variant="primary" href="/pre-assessment">
           + New Pre-Assessment
@@ -185,7 +185,7 @@ export default function PatientDashboardPage() {
             <p className="mb-4 max-w-[500px] text-[0.85rem] text-ink-muted">
               Answer a structured set of questions about your symptoms and risk
               factors. This typically takes 5–8 minutes. Your responses will be
-              reviewed by a clinician at ABUTH.
+              reviewed by a clinician.
             </p>
             <Button variant="primary" href="/pre-assessment">
               Begin Pre-Assessment →

@@ -87,7 +87,7 @@ export default function ProfilePage() {
     <DashboardShell
       active="/profile"
       title="My Profile"
-      subtitle="Your personal and medical details on file with ABUTH"
+      subtitle="Your personal and medical details on file"
     >
       <div className="mx-auto max-w-[720px]">
         <div className="mb-6 flex items-center gap-4 rounded-card-lg border border-border bg-white p-6 shadow-card">

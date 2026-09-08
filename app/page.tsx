@@ -58,7 +58,7 @@ export default function Home() {
       <section className="flex min-h-[88vh] flex-col items-center gap-[60px] bg-gradient-to-br from-navy from-55% to-navy-light px-[5%] py-20 md:flex-row md:items-center">
         <div className="max-w-[520px] flex-1">
           <div className="mb-[18px] text-[0.72rem] font-semibold uppercase tracking-[0.1em] text-teal-light">
-            Ahmadu Bello University Teaching Hospital, Zaria
+            Clinical Decision Support for Prostate Health
           </div>
           <h1 className="mb-5 text-[clamp(2.4rem,4.5vw,3.8rem)] leading-[1.08] text-white">
             Prostate Cancer
@@ -166,8 +166,7 @@ export default function Home() {
           <span>Prostatecare</span>
         </div>
         <p className="text-[0.72rem] text-white/30">
-          Final Year Project · Ahmadu Bello University Teaching Hospital, Zaria,
-          Kaduna State · 2026
+          Final Year Project · Prostatecare · 2026
         </p>
       </footer>
     </>

@@ -150,7 +150,7 @@ export const RISK_TIERS: RiskTier[] = [
     summary:
       "Your responses indicate a pattern of symptoms that requires urgent clinical attention.",
     recommendation:
-      "You should seek an immediate appointment at the ABUTH Urology or Oncology department. Do not delay. Bring this assessment report with you. A doctor will conduct a physical examination, request a PSA blood test, and determine if further imaging is needed.",
+      "You should seek an immediate appointment with a urology or oncology department. Do not delay. Bring this assessment report with you. A doctor will conduct a physical examination, request a PSA blood test, and determine if further imaging is needed.",
     urgency: "SAME DAY OR NEXT AVAILABLE APPOINTMENT",
   },
   {
@@ -163,7 +163,7 @@ export const RISK_TIERS: RiskTier[] = [
     summary:
       "Your responses suggest a high level of concerning symptoms and risk factors.",
     recommendation:
-      "An appointment with a urologist at ABUTH is strongly recommended within the next 1–2 weeks. A PSA test and digital rectal examination (DRE) will be arranged. Please do not self-medicate before your consultation.",
+      "An appointment with a urologist is strongly recommended within the next 1–2 weeks. A PSA test and digital rectal examination (DRE) will be arranged. Please do not self-medicate before your consultation.",
     urgency: "WITHIN 1–2 WEEKS",
   },
   {
@@ -176,7 +176,7 @@ export const RISK_TIERS: RiskTier[] = [
     summary:
       "Your responses suggest moderate symptoms that warrant clinical evaluation.",
     recommendation:
-      "Schedule an outpatient consultation at ABUTH within the coming weeks. A doctor will review your responses and advise on appropriate next steps, which may include a PSA screening test.",
+      "Schedule an outpatient consultation within the coming weeks. A doctor will review your responses and advise on appropriate next steps, which may include a PSA screening test.",
     urgency: "WITHIN 4 WEEKS",
   },
   {

@@ -138,7 +138,7 @@ export default function ClinicianRegisterPage() {
           <FormInput
             id="hospitalAffiliation"
             label="Hospital Affiliation"
-            placeholder="e.g. ABUTH"
+            placeholder="e.g. City General Hospital"
             value={form.hospitalAffiliation}
             onChange={(e) => update("hospitalAffiliation", e.target.value)}
           />

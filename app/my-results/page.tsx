@@ -150,7 +150,7 @@ export default function MyResultsPage() {
               ) : (
                 <Alert
                   type="amber"
-                  message="Your assessment is awaiting review by a clinician at ABUTH. You will be contacted when the review is complete."
+                  message="Your assessment is awaiting review by a clinician. You will be contacted when the review is complete."
                 />
               )}
             </div>

@@ -86,9 +86,9 @@ export default function RiskResult({ result }: { result: CDSSResult }) {
         </div>
         <p className="mt-3 text-[0.72rem] italic text-ink-muted">
           This preliminary assessment is based on self-reported symptoms only. A
-          clinician at ABUTH will review your responses before any clinical
-          decision is made. This system does not replace physical examination,
-          PSA testing, or professional medical judgement.
+          clinician will review your responses before any clinical decision is
+          made. This system does not replace physical examination, PSA testing,
+          or professional medical judgement.
         </p>
       </div>
 
