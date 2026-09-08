@@ -72,7 +72,15 @@ const NAV_CONFIG: Record<NavRole, RoleConfig> = {
   },
 };
 
-export default function Sidebar({ active }: { active: string }) {
+export default function Sidebar({
+  active,
+  open,
+  onClose,
+}: {
+  active: string;
+  open: boolean;
+  onClose: () => void;
+}) {
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
 
@@ -117,7 +125,11 @@ export default function Sidebar({ active }: { active: string }) {
   const config = NAV_CONFIG[role as NavRole];
 
   return (
-    <aside className="fixed left-0 top-0 z-50 flex h-screen w-[250px] flex-shrink-0 flex-col border-r border-border bg-white">
+    <aside
+      className={`fixed left-0 top-0 z-50 flex h-screen w-[250px] flex-shrink-0 flex-col border-r border-border bg-white shadow-[8px_0_24px_rgba(27,42,74,0.08)] transition-transform duration-200 min-[681px]:translate-x-0 min-[681px]:shadow-none ${
+        open ? "translate-x-0" : "-translate-x-full"
+      }`}
+    >
       <div className="flex items-center gap-2.5 border-b border-border px-[22px] pb-[18px] pt-5">
         <BrandMark small />
         <div className="flex flex-col">
@@ -126,6 +138,14 @@ export default function Sidebar({ active }: { active: string }) {
           </span>
           <span className="text-[0.6rem] text-ink-muted">{config.tagline}</span>
         </div>
+        <button
+          type="button"
+          aria-label="Close navigation menu"
+          onClick={onClose}
+          className="ml-auto inline-flex h-8 w-8 items-center justify-center rounded-lg text-lg text-ink-muted hover:bg-sand hover:text-navy min-[681px]:hidden"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
       </div>
 
       <nav className="flex-1 overflow-y-auto py-3">
@@ -138,6 +158,7 @@ export default function Sidebar({ active }: { active: string }) {
               <Link
                 key={item.href}
                 href={item.href}
+                onClick={onClose}
                 className={`flex items-center gap-[11px] border-l-[3px] px-[22px] py-[11px] text-[0.85rem] font-medium transition-all duration-150 ${
                   active === item.href
                     ? "border-teal bg-teal-dim text-navy"
