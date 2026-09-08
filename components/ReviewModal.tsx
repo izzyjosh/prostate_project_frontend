@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Button from "./Button";
 import { FormSelect } from "./FormField";
-import { GroupKey, KNOWLEDGE_BASE } from "@/lib/cdss";
+import { GroupKey, KNOWLEDGE_BASE } from "@/lib/risk-evaluation";
 import {
   authApiClient,
   ClinicianAssessmentResponse,

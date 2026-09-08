@@ -16,9 +16,9 @@ const dmSerifDisplay = DM_Serif_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Prostatecare — Clinical Decision Support System",
+  title: "Prostate Risk Evaluation System",
   description:
-    "A web-based platform that captures patient symptoms, evaluates risk factors, and equips clinicians with structured decision support — before the consultation begins.",
+    "A web-based platform that captures patient symptoms and evaluates prostate health risk before the consultation begins.",
 };
 
 export default function RootLayout({

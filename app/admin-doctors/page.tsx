@@ -6,11 +6,7 @@ import DashboardShell from "@/components/DashboardShell";
 import Badge from "@/components/Badge";
 import Button from "@/components/Button";
 import Alert from "@/components/Alert";
-import {
-  authApiClient,
-  AdminUser,
-  getApiErrorMessage,
-} from "@/lib/api";
+import { authApiClient, AdminUser, getApiErrorMessage } from "@/lib/api";
 
 function formatDate(ts: string) {
   return new Date(ts).toLocaleDateString("en-GB", {
@@ -62,10 +58,7 @@ export default function AdminDoctorsPage() {
     init();
   }, [router, load]);
 
-  async function runAction(
-    action: () => Promise<unknown>,
-    doctorId: string,
-  ) {
+  async function runAction(action: () => Promise<unknown>, doctorId: string) {
     setBusyId(doctorId);
     try {
       await action();
@@ -84,7 +77,7 @@ export default function AdminDoctorsPage() {
     <DashboardShell
       active="/admin-doctors"
       title="Doctors"
-      subtitle="Clinician accounts with access to the CDSS review workflow"
+      subtitle="Clinician accounts with access to the risk evaluation review workflow"
     >
       {error && <Alert type="error" message={error} />}
 
@@ -93,20 +86,16 @@ export default function AdminDoctorsPage() {
           <table className="w-full text-[0.85rem]">
             <thead>
               <tr>
-                {[
-                  "Clinician",
-                  "Email",
-                  "Registered",
-                  "Status",
-                  "Actions",
-                ].map((h) => (
-                  <th
-                    key={h}
-                    className="whitespace-nowrap border-b border-border bg-sand px-4 py-2.5 text-left text-[0.68rem] font-bold uppercase tracking-[0.07em] text-ink-muted"
-                  >
-                    {h}
-                  </th>
-                ))}
+                {["Clinician", "Email", "Registered", "Status", "Actions"].map(
+                  (h) => (
+                    <th
+                      key={h}
+                      className="whitespace-nowrap border-b border-border bg-sand px-4 py-2.5 text-left text-[0.68rem] font-bold uppercase tracking-[0.07em] text-ink-muted"
+                    >
+                      {h}
+                    </th>
+                  ),
+                )}
               </tr>
             </thead>
             <tbody>
@@ -159,9 +148,7 @@ export default function AdminDoctorsPage() {
                               onClick={() =>
                                 runAction(
                                   () =>
-                                    authApiClient.approveClinicianAccount(
-                                      d.id,
-                                    ),
+                                    authApiClient.approveClinicianAccount(d.id),
                                   d.id,
                                 )
                               }

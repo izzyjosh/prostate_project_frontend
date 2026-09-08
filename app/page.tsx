@@ -41,7 +41,7 @@ const stages = [
   {
     num: "03",
     title: "Decision Support",
-    body: "The CDSS engine scores responses and classifies the patient's risk tier with urgency flags for the clinician.",
+    body: "The risk evaluation engine scores responses and classifies the patient's risk tier with urgency flags for the clinician.",
   },
   {
     num: "04",
@@ -58,7 +58,7 @@ export default function Home() {
       <section className="flex min-h-[88vh] flex-col items-center gap-[60px] bg-gradient-to-br from-navy from-55% to-navy-light px-[5%] py-20 md:flex-row md:items-center">
         <div className="max-w-[520px] flex-1">
           <div className="mb-[18px] text-[0.72rem] font-semibold uppercase tracking-[0.1em] text-teal-light">
-            Clinical Decision Support for Prostate Health
+            Prostate Risk Evaluation System
           </div>
           <h1 className="mb-5 text-[clamp(2.4rem,4.5vw,3.8rem)] leading-[1.08] text-white">
             Prostate Cancer

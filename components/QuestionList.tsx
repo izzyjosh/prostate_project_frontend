@@ -1,4 +1,4 @@
-import { Question } from "@/lib/cdss";
+import { Question } from "@/lib/risk-evaluation";
 
 export default function QuestionList({
   questions,

@@ -9,7 +9,12 @@ import RiskResult from "@/components/RiskResult";
 import Alert from "@/components/Alert";
 import Button from "@/components/Button";
 import { authApiClient } from "@/lib/api";
-import { KNOWLEDGE_BASE, GroupKey, runCDSS, CDSSResult } from "@/lib/cdss";
+import {
+  KNOWLEDGE_BASE,
+  GroupKey,
+  runRiskEvaluation,
+  RiskEvaluationResult,
+} from "@/lib/risk-evaluation";
 
 const STEP_GROUPS: GroupKey[] = ["groupA", "groupB", "groupC", "groupD"];
 
@@ -18,7 +23,7 @@ export default function PreAssessmentPage() {
   const [checking, setChecking] = useState(true);
   const [step, setStep] = useState(1);
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
-  const [result, setResult] = useState<CDSSResult | null>(null);
+  const [result, setResult] = useState<RiskEvaluationResult | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
 
@@ -61,7 +66,7 @@ export default function PreAssessmentPage() {
   }
 
   function submit() {
-    const r = runCDSS([...selectedIds]);
+    const r = runRiskEvaluation([...selectedIds]);
     setSubmitting(true);
     setError("");
     authApiClient

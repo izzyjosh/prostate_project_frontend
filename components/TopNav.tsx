@@ -11,7 +11,7 @@ export default function TopNav() {
             Prostatecare
           </span>
           <span className="mt-0.5 text-[0.68rem] tracking-wide text-white/45">
-            Clinical Decision Support System
+            Prostate Risk Evaluation System
           </span>
         </div>
       </div>

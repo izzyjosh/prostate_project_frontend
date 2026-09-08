@@ -193,7 +193,7 @@ export const RISK_TIERS: RiskTier[] = [
   },
 ];
 
-export interface CDSSResult {
+export interface RiskEvaluationResult {
   score: number;
   maxScore: number;
   percentage: number;
@@ -259,7 +259,7 @@ export function getAutomaticRecommendation(selectedIds: string[]) {
   );
 }
 
-export function runCDSS(selectedIds: string[]): CDSSResult {
+export function runRiskEvaluation(selectedIds: string[]): RiskEvaluationResult {
   let score = 0;
   let maxScore = 0;
   const breakdown: Record<GroupKey, number> = {

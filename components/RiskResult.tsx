@@ -1,5 +1,9 @@
 import Button from "./Button";
-import { CDSSResult, GroupKey, KNOWLEDGE_BASE } from "@/lib/cdss";
+import {
+  RiskEvaluationResult,
+  GroupKey,
+  KNOWLEDGE_BASE,
+} from "@/lib/risk-evaluation";
 
 const BOX_CLASSES: Record<string, string> = {
   low: "border-success bg-success-dim",
@@ -8,7 +12,11 @@ const BOX_CLASSES: Record<string, string> = {
   urgent: "border-danger bg-danger-dim",
 };
 
-export default function RiskResult({ result }: { result: CDSSResult }) {
+export default function RiskResult({
+  result,
+}: {
+  result: RiskEvaluationResult;
+}) {
   const t = result.tier;
   const groupEntries = Object.entries(KNOWLEDGE_BASE) as [
     GroupKey,

@@ -53,7 +53,7 @@ export default function LoginPage() {
 
   return (
     <AuthCard
-      tagline="Clinical Decision Support System"
+      tagline="Prostate Risk Evaluation System"
       heading="Welcome back"
       sub="Sign in to access your account"
     >

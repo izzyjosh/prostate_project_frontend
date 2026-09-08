@@ -13,7 +13,7 @@ import {
   ClinicianPatientSummary,
   getApiErrorMessage,
 } from "@/lib/api";
-import { KNOWLEDGE_BASE, GroupKey, QuestionGroup } from "@/lib/cdss";
+import { KNOWLEDGE_BASE, GroupKey, QuestionGroup } from "@/lib/risk-evaluation";
 
 type TierKey = "urgent" | "high" | "moderate" | "low";
 
@@ -272,7 +272,7 @@ export default function ReportsPage() {
     <DashboardShell
       active="/reports"
       title="Clinical Reports"
-      subtitle="Aggregate CDSS analytics across all patient pre-assessments"
+      subtitle="Aggregate risk evaluation analytics across all patient pre-assessments"
       action={
         <div className="flex items-center gap-3">
           <span className="text-[0.78rem] text-ink-muted print:hidden">
@@ -338,7 +338,7 @@ export default function ReportsPage() {
           <div className="mb-6 grid grid-cols-1 gap-5 lg:grid-cols-2">
             <Panel
               title="Risk Tier Distribution"
-              hint="All assessments by CDSS-assigned tier"
+              hint="All assessments by assigned risk tier"
             >
               <div className="flex flex-col gap-4">
                 {TIER_ORDER.map((tier) => (
