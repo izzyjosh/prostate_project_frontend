@@ -23,6 +23,9 @@ export default function PreAssessmentPage() {
   const [checking, setChecking] = useState(true);
   const [step, setStep] = useState(1);
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [noneSelectedGroups, setNoneSelectedGroups] = useState<Set<GroupKey>>(
+    new Set(),
+  );
   const [result, setResult] = useState<RiskEvaluationResult | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
@@ -43,7 +46,7 @@ export default function PreAssessmentPage() {
     loadUser();
   }, [router]);
 
-  function toggle(id: string) {
+  function toggle(id: string, groupKey: GroupKey) {
     setSelectedIds((prev) => {
       const next = new Set(prev);
       if (next.has(id)) {
@@ -51,6 +54,29 @@ export default function PreAssessmentPage() {
       } else {
         next.add(id);
       }
+      return next;
+    });
+    setNoneSelectedGroups((prev) => {
+      const next = new Set(prev);
+      next.delete(groupKey);
+      return next;
+    });
+  }
+
+  function toggleNone(groupKey: GroupKey) {
+    const group = KNOWLEDGE_BASE[groupKey];
+    setNoneSelectedGroups((prev) => {
+      const next = new Set(prev);
+      if (next.has(groupKey)) {
+        next.delete(groupKey);
+      } else {
+        next.add(groupKey);
+      }
+      return next;
+    });
+    setSelectedIds((prev) => {
+      const next = new Set(prev);
+      group.questions.forEach((question) => next.delete(question.id));
       return next;
     });
   }
@@ -145,7 +171,9 @@ export default function PreAssessmentPage() {
               <QuestionList
                 questions={group.questions}
                 selectedIds={selectedIds}
-                onToggle={toggle}
+                onToggle={(id) => toggle(id, groupKey)}
+                noneSelected={noneSelectedGroups.has(groupKey)}
+                onToggleNone={() => toggleNone(groupKey)}
               />
               <div className="mt-7 flex items-center justify-between border-t border-border pt-5">
                 {step > 1 ? (
