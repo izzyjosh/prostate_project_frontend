@@ -15,9 +15,9 @@ import { authApiClient, getApiErrorMessage } from "@/lib/api";
 
 const BLOOD_GROUPS = ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"];
 
-function getMinimumAdultBirthDate() {
+function getMinimumBirthDate() {
   const date = new Date();
-  date.setFullYear(date.getFullYear() - 18);
+  date.setFullYear(date.getFullYear() - 40);
   return date.toISOString().slice(0, 10);
 }
 
@@ -70,15 +70,6 @@ export default function RegisterPage() {
     if (isFutureDate(form.dob)) {
       setAlert({
         message: "Date of birth cannot be in the future.",
-        type: "error",
-      });
-      return;
-    }
-
-    const minimumAdultBirthDate = getMinimumAdultBirthDate();
-    if (form.dob > minimumAdultBirthDate) {
-      setAlert({
-        message: "You must be at least 18 years old to register.",
         type: "error",
       });
       return;
@@ -141,7 +132,7 @@ export default function RegisterPage() {
       wide
     >
       {alert && <Alert message={alert.message} type={alert.type} />}
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} noValidate>
         <FormSectionTitle first>Personal Information</FormSectionTitle>
         <FormRow2>
           <FormInput
@@ -164,7 +155,7 @@ export default function RegisterPage() {
             id="dob"
             label="Date of Birth"
             type="date"
-            max={getMinimumAdultBirthDate()}
+            max={getMinimumBirthDate()}
             value={form.dob}
             onChange={(e) => update("dob", e.target.value)}
           />
