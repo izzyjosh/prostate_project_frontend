@@ -240,20 +240,9 @@ export default function ReportsPage() {
       .slice(-6);
   }, [all]);
 
-  const turnaround = useMemo(() => {
-    const times = reviewed
-      .filter((a) => a.reviewedAt)
-      .map((a) => daysBetween(a.timestamp, a.reviewedAt as string))
-      .filter((d) => d >= 0);
-    if (times.length === 0) return null;
-    return times.reduce((sum, d) => sum + d, 0) / times.length;
-  }, [reviewed]);
-
   if (!ready) return null;
 
   const total = all.length;
-  const reviewRate =
-    total > 0 ? Math.round((reviewed.length / total) * 100) : 0;
   const recommended = reviewed.length;
   const urgentBacklog = pending.filter(
     (a) => a.tier.tier === "urgent" || a.tier.tier === "high",
@@ -301,30 +290,16 @@ export default function ReportsPage() {
         </div>
       ) : (
         <>
-          <div className="mb-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mb-6 grid grid-cols-1 gap-5 sm:grid-cols-2">
             <StatCard
               label="Total Assessments"
               value={String(total)}
               sub={`Across ${patients.length} patient${patients.length === 1 ? "" : "s"}`}
             />
             <StatCard
-              label="Review Rate"
-              value={`${reviewRate}%`}
-              sub={`${reviewed.length} reviewed / ${pending.length} pending`}
-              accentColor="teal"
-            />
-            <StatCard
               label="Recommendations Issued"
               value={String(recommended)}
               sub={`${reviewed.filter((a) => a.doctorRecommendation).length} include extra clinician guidance`}
-            />
-            <StatCard
-              label="Avg. Turnaround"
-              value={turnaround === null ? "—" : `${turnaround.toFixed(1)}d`}
-              sub="Submission to review"
-              accentColor={
-                turnaround !== null && turnaround > 14 ? "danger" : "teal"
-              }
             />
           </div>
 

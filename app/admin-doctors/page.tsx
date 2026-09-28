@@ -170,18 +170,6 @@ export default function AdminDoctorsPage() {
                               >
                                 {busyId === d.id ? "..." : "Suspend"}
                               </Button>
-                              <Button
-                                variant="secondary"
-                                small
-                                onClick={() =>
-                                  runAction(
-                                    () => authApiClient.activateUser(d.id),
-                                    d.id,
-                                  )
-                                }
-                              >
-                                {busyId === d.id ? "..." : "Activate"}
-                              </Button>
                             </>
                           )}
                           {d.status === "pending" && (
