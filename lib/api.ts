@@ -200,6 +200,17 @@ function getErrorMessage(data: unknown, fallback: string): string {
       if (messages.length > 0) {
         return messages.join(" ");
       }
+
+      const validationMessages = message
+        .filter(isPlainObject)
+        .map((item) => item.error)
+        .filter(
+          (item): item is string =>
+            typeof item === "string" && item.trim().length > 0,
+        );
+      if (validationMessages.length > 0) {
+        return validationMessages.join(" ");
+      }
     }
 
     const nestedError = data.error;
