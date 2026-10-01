@@ -183,13 +183,7 @@ export default function AdminDashboardPage() {
                       </Badge>
                     </td>
                     <td className="px-4 py-3.5">
-                      <Badge
-                        variant={
-                          a.status === "confirmed" ? "confirmed" : "pending"
-                        }
-                      >
-                        {a.status === "confirmed" ? "Reviewed" : "Pending"}
-                      </Badge>
+                      <Badge variant="confirmed">Recommendation Ready</Badge>
                     </td>
                   </tr>
                 ))

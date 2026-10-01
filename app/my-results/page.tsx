@@ -21,14 +21,6 @@ function formatLongDate(ts: string) {
   });
 }
 
-function formatFollowup(ts: string) {
-  return new Date(ts).toLocaleDateString("en-GB", {
-    day: "2-digit",
-    month: "long",
-    year: "numeric",
-  });
-}
-
 export default function MyResultsPage() {
   const router = useRouter();
   const [ready, setReady] = useState(false);
@@ -104,11 +96,7 @@ export default function MyResultsPage() {
                   Submitted: {formatLongDate(a.timestamp)}
                 </div>
               </div>
-              <Badge
-                variant={a.status === "confirmed" ? "confirmed" : "pending"}
-              >
-                "✅ Recommendation Ready"
-              </Badge>
+              <Badge variant="confirmed">Recommendation Ready</Badge>
             </div>
             <div className="p-6">
               <div className="mb-2 text-[0.75rem] font-bold uppercase tracking-[0.06em] text-ink-muted">
@@ -117,11 +105,6 @@ export default function MyResultsPage() {
               <p className="mb-4 text-[0.85rem] text-ink-mid">
                 {a.automaticRecommendation || a.tier.recommendation}
               </p>
-              {a.followupDate && (
-                <div className="rounded-lg border-l-[3px] border-teal bg-teal-dim p-4 text-[0.85rem] text-ink">
-                  <strong>Follow-up:</strong> {formatFollowup(a.followupDate)}
-                </div>
-              )}
             </div>
           </div>
         ))

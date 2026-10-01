@@ -93,10 +93,9 @@ export default function RiskResult({
           </div>
         </div>
         <p className="mt-3 text-[0.72rem] italic text-ink-muted">
-          This preliminary assessment is based on self-reported symptoms only. A
-          these recommendations are based on your responses. This system does
-          not replace physical examination, PSA testing, or professional medical
-          judgement.
+          This preliminary assessment is based on self-reported symptoms only.
+          These recommendations do not replace physical examination, PSA
+          testing, or professional medical judgement.
         </p>
       </div>
 

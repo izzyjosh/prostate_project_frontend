@@ -76,7 +76,7 @@ export default function PatientDashboardPage() {
         />
         <StatCard
           label="Recommendations"
-          value={String(dashboard.stats.prescriptions)}
+          value={String(dashboard.stats.recommendations)}
           sub="Guidance generated from your assessment"
         />
         <StatCard

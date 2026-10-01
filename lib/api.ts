@@ -57,26 +57,20 @@ export interface PatientAssessmentResponse {
   breakdown: Record<string, number>;
   selectedIds: string[];
   timestamp: string;
-  status: "pending" | "confirmed";
-  doctorRecommendation: string | null;
-  doctorNotes: string | null;
-  reviewedAt: string | null;
-  confirmedDiagnosis: string | null;
-  followupDate: string | null;
-  urgency: string | null;
+  status: "confirmed";
 }
 
 export interface PatientDashboardResponse {
   profile: PatientProfileResponse;
   stats: {
     assessments: number;
-    prescriptions: number;
+    recommendations: number;
     latestRiskLevel: string;
     latestAssessmentDate: string | null;
   };
   latestAssessment: PatientAssessmentResponse | null;
   assessments: PatientAssessmentResponse[];
-  prescriptions: PatientAssessmentResponse[];
+  recommendations: PatientAssessmentResponse[];
 }
 
 export interface AdminDashboardResponse {
@@ -88,8 +82,6 @@ export interface AdminDashboardResponse {
   riskTierDistribution: { tier: string; count: number }[];
   mostCommonSymptoms: { id: string; count: number }[];
   recentAssessments: PatientAssessmentResponse[];
-  reviewedToday: PatientAssessmentResponse[];
-  pendingReviews: PatientAssessmentResponse[];
 }
 
 export interface AdminUser {
@@ -105,9 +97,11 @@ export interface AdminUser {
   status: string | null;
 }
 
-export type AdminActionResponse =
-  | { message: string; userId: string; isActive: boolean }
-  | { message: string; userId: string; isActive: boolean };
+export type AdminActionResponse = {
+  message: string;
+  userId: string;
+  isActive: boolean;
+};
 
 export class ApiError extends Error {
   status: number;
@@ -221,6 +215,7 @@ export class BaseApiClient {
     options: ApiRequestOptions = {},
   ): Promise<T> {
     const { query, body, headers, skipAuthRefresh, ...requestInit } = options;
+    void skipAuthRefresh;
     const url = this.buildUrl(path, query);
     const requestHeaders = new Headers(headers);
 
@@ -472,8 +467,10 @@ export class AuthApiClient extends BaseApiClient {
     return this.get<PatientAssessmentResponse[]>("/api/patients/assessments");
   }
 
-  public getPatientPrescriptions() {
-    return this.get<PatientAssessmentResponse[]>("/api/patients/prescriptions");
+  public getPatientRecommendations() {
+    return this.get<PatientAssessmentResponse[]>(
+      "/api/patients/recommendations",
+    );
   }
 
   public createPatientAssessment(body: {
