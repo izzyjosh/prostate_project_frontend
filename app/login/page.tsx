@@ -32,11 +32,9 @@ export default function LoginPage() {
       const currentUser = await authApiClient.getCurrentUser();
 
       const route =
-        currentUser.role === "clinician"
-          ? "/doctor-dashboard"
-          : currentUser.role === "admin"
-            ? "/admin-dashboard"
-            : "/patient-dashboard";
+        currentUser.role === "admin"
+          ? "/admin-dashboard"
+          : "/patient-dashboard";
 
       router.replace(route);
     } catch (error) {
@@ -83,12 +81,6 @@ export default function LoginPage() {
         New patient?{" "}
         <Link href="/register" className="font-semibold text-teal">
           Create an account
-        </Link>
-      </p>
-      <p className="mt-2 text-center text-[0.8rem] text-ink-muted">
-        Clinician?{" "}
-        <Link href="/register/clinician" className="font-semibold text-teal">
-          Register here
         </Link>
       </p>
     </AuthCard>

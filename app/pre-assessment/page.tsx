@@ -133,7 +133,7 @@ export default function PreAssessmentPage() {
     <DashboardShell
       active="/pre-assessment"
       title="Prostate Cancer Pre-Assessment"
-      subtitle="Answer honestly — your responses will be reviewed by a clinician before your consultation"
+      subtitle="Answer honestly to receive personalized recommendations based on your responses"
     >
       <div className="mx-auto max-w-[860px]">
         <WizardProgress currentStep={step} />

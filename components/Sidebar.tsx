@@ -6,8 +6,7 @@ import { useEffect, useState } from "react";
 import BrandMark from "./BrandMark";
 import { authApiClient, User } from "@/lib/api";
 
-// Nav-menu grouping. "doctor" is the display alias for the API's "clinician" role.
-type NavRole = "patient" | "doctor" | "admin";
+type NavRole = "patient" | "admin";
 
 interface NavItem {
   href: string;
@@ -40,24 +39,6 @@ const NAV_CONFIG: Record<NavRole, RoleConfig> = {
       {
         label: "Account",
         items: [{ href: "/profile", label: "My Profile" }],
-      },
-    ],
-  },
-  doctor: {
-    tagline: "Clinician Portal",
-    sections: [
-      {
-        label: "Clinic",
-        items: [
-          { href: "/doctor-dashboard", label: "Dashboard" },
-          { href: "/pending-reviews", label: "Pending Reviews" },
-          { href: "/all-patients", label: "All Patients" },
-          { href: "/prescriptions", label: "Recommendations" },
-        ],
-      },
-      {
-        label: "Reports",
-        items: [{ href: "/reports", label: "Clinical Reports" }],
       },
     ],
   },
@@ -103,7 +84,7 @@ export default function Sidebar({
     });
   }
 
-  // Admin accounts have no patient/clinician profile, so the API omits names.
+  // Admin accounts have no patient profile, so the API omits names.
   function userInitials() {
     if (!user) return "…";
     if (user.firstName && user.lastName) {
@@ -120,9 +101,7 @@ export default function Sidebar({
     return user.email || "User";
   }
 
-  const role =
-    user?.role === "clinician" ? "doctor" : (user?.role ?? "patient");
-  const config = NAV_CONFIG[role as NavRole];
+  const config = NAV_CONFIG[(user?.role ?? "patient") as NavRole];
 
   return (
     <aside
@@ -183,9 +162,7 @@ export default function Sidebar({
             </div>
             <div className="text-[0.65rem] text-ink-muted">
               {user
-                ? user.role === "clinician"
-                  ? "Clinician"
-                  : user.role.charAt(0).toUpperCase() + user.role.slice(1)
+                ? user.role.charAt(0).toUpperCase() + user.role.slice(1)
                 : ""}
             </div>
           </div>

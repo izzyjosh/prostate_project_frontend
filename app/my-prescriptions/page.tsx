@@ -107,8 +107,7 @@ export default function MyPrescriptionsPage() {
             No recommendations yet
           </h3>
           <p className="mb-5 text-ink-muted">
-            Recommendations will appear here after you complete an assessment or
-            a clinician reviews it.
+            Recommendations will appear here after you complete an assessment.
           </p>
           <Button variant="primary" href="/my-results">
             View my results →
@@ -120,7 +119,7 @@ export default function MyPrescriptionsPage() {
             <StatCard
               label="Recommendations"
               value={String(prescriptions.length)}
-              sub="Automatic and clinician guidance"
+              sub="Guidance generated from your assessment"
             />
             <StatCard
               label="Most Recent"
@@ -152,7 +151,7 @@ export default function MyPrescriptionsPage() {
 
           <Alert
             type="info"
-            message="This guidance supports, but does not replace, a clinician's assessment. Contact a clinician if your symptoms worsen or you develop new symptoms."
+            message="This guidance is based on your responses. Seek medical care if your symptoms worsen or you develop new symptoms."
           />
 
           <div className="flex flex-col gap-5">

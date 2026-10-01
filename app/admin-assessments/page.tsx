@@ -7,7 +7,7 @@ import Badge from "@/components/Badge";
 import Alert from "@/components/Alert";
 import {
   authApiClient,
-  ClinicianAssessmentResponse,
+  PatientAssessmentResponse,
   getApiErrorMessage,
 } from "@/lib/api";
 
@@ -25,7 +25,7 @@ function formatDate(ts: string) {
 export default function AdminAssessmentsPage() {
   const router = useRouter();
   const [ready, setReady] = useState(false);
-  const [assessments, setAssessments] = useState<ClinicianAssessmentResponse[]>(
+  const [assessments, setAssessments] = useState<PatientAssessmentResponse[]>(
     [],
   );
   const [error, setError] = useState("");

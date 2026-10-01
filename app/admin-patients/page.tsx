@@ -8,7 +8,7 @@ import Alert from "@/components/Alert";
 import {
   authApiClient,
   AdminUser,
-  ClinicianAssessmentResponse,
+  PatientAssessmentResponse,
   getApiErrorMessage,
 } from "@/lib/api";
 
@@ -24,7 +24,7 @@ export default function AdminPatientsPage() {
   const router = useRouter();
   const [ready, setReady] = useState(false);
   const [patients, setPatients] = useState<AdminUser[]>([]);
-  const [assessments, setAssessments] = useState<ClinicianAssessmentResponse[]>(
+  const [assessments, setAssessments] = useState<PatientAssessmentResponse[]>(
     [],
   );
   const [error, setError] = useState("");
@@ -56,7 +56,7 @@ export default function AdminPatientsPage() {
   }, [router]);
 
   const assessmentsByPatient = useMemo(() => {
-    const map = new Map<string, ClinicianAssessmentResponse[]>();
+    const map = new Map<string, PatientAssessmentResponse[]>();
     for (const a of assessments) {
       const list = map.get(a.patientId) ?? [];
       list.push(a);
@@ -172,9 +172,7 @@ export default function AdminPatientsPage() {
                         {p.createdAt ? formatDate(p.createdAt) : "—"}
                       </td>
                       <td className="px-4 py-3.5">
-                        <Badge
-                          variant={p.isActive ? "confirmed" : "pending"}
-                        >
+                        <Badge variant={p.isActive ? "confirmed" : "pending"}>
                           {p.isActive ? "Active" : "Suspended"}
                         </Badge>
                       </td>

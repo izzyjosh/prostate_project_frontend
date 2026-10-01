@@ -41,12 +41,12 @@ const stages = [
   {
     num: "03",
     title: "Decision Support",
-    body: "The risk evaluation engine scores responses and classifies the patient's risk tier with urgency flags for the clinician.",
+    body: "The risk evaluation engine scores responses and classifies your risk tier with clear urgency guidance.",
   },
   {
     num: "04",
     title: "Recommendations & Records",
-    body: "The system provides assessment guidance, while clinicians add recommendations and securely store the complete record.",
+    body: "The system provides personalized recommendations and securely stores your complete assessment record.",
   },
 ];
 
@@ -71,7 +71,7 @@ export default function Home() {
           </h1>
           <p className="mb-8 max-w-[440px] text-base leading-[1.7] text-white/60">
             A web-based platform that captures patient symptoms, evaluates risk
-            factors, and equips clinicians with structured decision support —
+            factors, and gives patients clear, structured recommendations —
             before the consultation begins.
           </p>
           <div className="mb-5 flex flex-wrap gap-3.5">
@@ -80,9 +80,6 @@ export default function Home() {
             </Button>
             <Button variant="outline-lg" href="/login">
               Login →
-            </Button>
-            <Button variant="outline-lg" href="/register/clinician">
-              Register as Clinician
             </Button>
           </div>
           <p className="max-w-[400px] text-[0.72rem] leading-[1.5] text-white/30">

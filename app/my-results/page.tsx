@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import DashboardShell from "@/components/DashboardShell";
 import Badge from "@/components/Badge";
 import Button from "@/components/Button";
-import Alert from "@/components/Alert";
 import { authApiClient, PatientAssessmentResponse } from "@/lib/api";
 
 const HEADER_BG: Record<string, string> = {
@@ -61,7 +60,7 @@ export default function MyResultsPage() {
     <DashboardShell
       active="/my-results"
       title="My Assessment Results"
-      subtitle="All your submitted pre-assessments and clinical feedback"
+      subtitle="All your submitted pre-assessments and recommendations"
       action={
         <Button variant="primary" href="/pre-assessment">
           + New Assessment
@@ -108,9 +107,7 @@ export default function MyResultsPage() {
               <Badge
                 variant={a.status === "confirmed" ? "confirmed" : "pending"}
               >
-                {a.status === "confirmed"
-                  ? "✅ Reviewed by Doctor"
-                  : "⏳ Pending Review"}
+                "✅ Recommendation Ready"
               </Badge>
             </div>
             <div className="p-6">
@@ -120,38 +117,10 @@ export default function MyResultsPage() {
               <p className="mb-4 text-[0.85rem] text-ink-mid">
                 {a.automaticRecommendation || a.tier.recommendation}
               </p>
-              {a.status === "confirmed" ? (
-                <div className="rounded-lg border-l-[3px] border-teal bg-teal-dim p-4">
-                  <div className="mb-2 text-[0.72rem] font-bold uppercase text-teal">
-                    Doctor&apos;s Clinical Review
-                  </div>
-                  <div className="text-[0.85rem] text-ink">
-                    <strong>Clinical Impression:</strong>{" "}
-                    {a.confirmedDiagnosis || "—"}
-                  </div>
-                  {a.doctorRecommendation && (
-                    <div className="mt-1.5 text-[0.85rem] text-ink">
-                      <strong>Additional Recommendation:</strong>{" "}
-                      {a.doctorRecommendation}
-                    </div>
-                  )}
-                  {a.doctorNotes && (
-                    <div className="mt-1.5 text-[0.85rem] text-ink">
-                      <strong>Notes:</strong> {a.doctorNotes}
-                    </div>
-                  )}
-                  {a.followupDate && (
-                    <div className="mt-1.5 text-[0.85rem] text-ink">
-                      <strong>Follow-up:</strong>{" "}
-                      {formatFollowup(a.followupDate)}
-                    </div>
-                  )}
+              {a.followupDate && (
+                <div className="rounded-lg border-l-[3px] border-teal bg-teal-dim p-4 text-[0.85rem] text-ink">
+                  <strong>Follow-up:</strong> {formatFollowup(a.followupDate)}
                 </div>
-              ) : (
-                <Alert
-                  type="amber"
-                  message="Your assessment is awaiting review by a clinician. You will be contacted when the review is complete."
-                />
               )}
             </div>
           </div>

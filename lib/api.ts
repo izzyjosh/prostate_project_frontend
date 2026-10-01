@@ -17,7 +17,7 @@ export interface User {
   firstName?: string;
   lastName?: string;
   email: string;
-  role: "patient" | "clinician" | "admin";
+  role: "patient" | "admin";
 }
 
 export interface PatientProfileResponse {
@@ -66,41 +66,6 @@ export interface PatientAssessmentResponse {
   urgency: string | null;
 }
 
-export interface ClinicianAssessmentResponse extends PatientAssessmentResponse {
-  patientEmail: string;
-}
-
-export interface ClinicianPatientSummary {
-  id: string;
-  firstName: string;
-  lastName: string;
-  fullName: string;
-  email: string;
-  phoneNumber: string;
-  address: string;
-  bloodGroup: string;
-  occupation: string;
-  knownConditions: string[];
-  assessmentsCount: number;
-  latestAssessment: ClinicianAssessmentResponse | null;
-}
-
-export interface ClinicianPatientDetail extends ClinicianPatientSummary {
-  age: number | null;
-  assessments: ClinicianAssessmentResponse[];
-}
-
-export interface ClinicianDashboardResponse {
-  stats: {
-    pendingReviews: number;
-    totalAssessments: number;
-    urgentCases: number;
-    reviewedToday: number;
-  };
-  pendingReviews: ClinicianAssessmentResponse[];
-  reviewedAssessments: ClinicianAssessmentResponse[];
-}
-
 export interface PatientDashboardResponse {
   profile: PatientProfileResponse;
   stats: {
@@ -117,23 +82,20 @@ export interface PatientDashboardResponse {
 export interface AdminDashboardResponse {
   stats: {
     patients: number;
-    clinicians: number;
     admins: number;
     assessments: number;
-    pendingReviews: number;
-    prescriptionsIssued: number;
   };
   riskTierDistribution: { tier: string; count: number }[];
   mostCommonSymptoms: { id: string; count: number }[];
-  recentAssessments: ClinicianAssessmentResponse[];
-  reviewedToday: ClinicianAssessmentResponse[];
-  pendingReviews: ClinicianAssessmentResponse[];
+  recentAssessments: PatientAssessmentResponse[];
+  reviewedToday: PatientAssessmentResponse[];
+  pendingReviews: PatientAssessmentResponse[];
 }
 
 export interface AdminUser {
   id: string;
   email: string;
-  role: "patient" | "clinician" | "admin";
+  role: "patient" | "admin";
   isVerified: boolean;
   isActive: boolean;
   createdAt: string;
@@ -145,7 +107,7 @@ export interface AdminUser {
 
 export type AdminActionResponse =
   | { message: string; userId: string; isActive: boolean }
-  | { message: string; clinicianId: string; status: string };
+  | { message: string; userId: string; isActive: boolean };
 
 export class ApiError extends Error {
   status: number;
@@ -472,33 +434,11 @@ export class AuthApiClient extends BaseApiClient {
     );
   }
 
-  public registerClinician(body: {
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
-    licenseNumber: string;
-    specialty?: string;
-    hospitalAffiliation?: string;
-  }) {
-    return this.post<{ userId: string; message: string }>(
-      "/api/auth/register/clinician",
-      body,
-      { skipAuthRefresh: true },
-    );
-  }
-
   public resendVerificationEmail(email: string) {
     return this.post<{ message: string }>(
       "/api/auth/resend-verification-email",
       { email },
       { skipAuthRefresh: true },
-    );
-  }
-
-  public approveClinician(clinicianId: string) {
-    return this.patch<{ message: string; clinicianId: string; status: string }>(
-      `/api/auth/clinicians/${clinicianId}/approve`,
     );
   }
 
@@ -560,52 +500,6 @@ export class AuthApiClient extends BaseApiClient {
     );
   }
 
-  public getClinicianDashboard() {
-    return this.get<ClinicianDashboardResponse>("/api/clinician/dashboard");
-  }
-
-  public getClinicianPatients() {
-    return this.get<ClinicianPatientSummary[]>("/api/clinician/patients");
-  }
-
-  public getClinicianPatientDetail(patientId: string) {
-    return this.get<ClinicianPatientDetail>(
-      `/api/clinician/patients/${patientId}`,
-    );
-  }
-
-  public getClinicianPendingReviews() {
-    return this.get<ClinicianAssessmentResponse[]>(
-      "/api/clinician/pending-reviews",
-    );
-  }
-
-  public getClinicianReviewedAssessments() {
-    return this.get<ClinicianAssessmentResponse[]>("/api/clinician/reviewed");
-  }
-
-  public getClinicianPrescriptions() {
-    return this.get<ClinicianAssessmentResponse[]>(
-      "/api/clinician/prescriptions",
-    );
-  }
-
-  public reviewClinicianAssessment(
-    assessmentId: string,
-    body: {
-      diagnosis: string;
-      recommendation?: string;
-      notes?: string;
-      followupDate?: string;
-      urgency: "Routine" | "Priority" | "Urgent";
-    },
-  ) {
-    return this.patch<ClinicianAssessmentResponse>(
-      `/api/clinician/assessments/${assessmentId}/review`,
-      body,
-    );
-  }
-
   public getAdminDashboard() {
     return this.get<AdminDashboardResponse>("/api/admin/dashboard");
   }
@@ -615,7 +509,7 @@ export class AuthApiClient extends BaseApiClient {
   }
 
   public getAdminAssessments() {
-    return this.get<ClinicianAssessmentResponse[]>("/api/admin/assessments");
+    return this.get<PatientAssessmentResponse[]>("/api/admin/assessments");
   }
 
   public suspendUser(userId: string) {
@@ -633,18 +527,6 @@ export class AuthApiClient extends BaseApiClient {
   public deleteUser(userId: string) {
     return this.delete<{ message: string; userId: string }>(
       `/api/admin/users/${userId}`,
-    );
-  }
-
-  public approveClinicianAccount(clinicianId: string) {
-    return this.patch<AdminActionResponse>(
-      `/api/admin/clinicians/${clinicianId}/approve`,
-    );
-  }
-
-  public rejectClinicianAccount(clinicianId: string) {
-    return this.patch<AdminActionResponse>(
-      `/api/admin/clinicians/${clinicianId}/reject`,
     );
   }
 }

@@ -53,11 +53,8 @@ export default function AdminDashboardPage() {
 
   const stats = dashboard?.stats ?? {
     patients: 0,
-    clinicians: 0,
     admins: 0,
     assessments: 0,
-    pendingReviews: 0,
-    prescriptionsIssued: 0,
   };
   const recent = dashboard?.recentAssessments ?? [];
   const urgent = recent.filter(
@@ -89,35 +86,19 @@ export default function AdminDashboardPage() {
           sub="Total accounts"
         />
         <StatCard
-          label="Clinicians"
-          value={String(stats.clinicians)}
-          sub="Doctor accounts"
-          accentColor="teal"
-        />
-        <StatCard
           label="Total Assessments"
           value={String(stats.assessments)}
           sub="Submitted system-wide"
         />
         <StatCard
-          label="Pending Reviews"
-          value={String(stats.pendingReviews)}
-          sub={`${stats.prescriptionsIssued} reviewed recommendations`}
+          label="Recommendations"
+          value={String(stats.assessments)}
+          sub="Generated from assessments"
           accentColor="amber"
         />
       </div>
 
       <div className="mb-6 grid grid-cols-1 gap-5 sm:grid-cols-3">
-        <Link
-          href="/admin-doctors"
-          className="rounded-card-lg border border-border bg-white p-5 shadow-card transition-colors hover:border-teal"
-        >
-          <div className="mb-1 text-[1.4rem]">🩺</div>
-          <div className="font-semibold text-navy">Manage Doctors</div>
-          <div className="mt-0.5 text-[0.78rem] text-ink-muted">
-            View clinician accounts
-          </div>
-        </Link>
         <Link
           href="/admin-patients"
           className="rounded-card-lg border border-border bg-white p-5 shadow-card transition-colors hover:border-teal"

@@ -243,12 +243,6 @@ export default function RegisterPage() {
           Sign in
         </Link>
       </p>
-      <p className="mt-2 text-center text-[0.8rem] text-ink-muted">
-        Clinician?{" "}
-        <Link href="/register/clinician" className="font-semibold text-teal">
-          Register here
-        </Link>
-      </p>
     </AuthCard>
   );
 }

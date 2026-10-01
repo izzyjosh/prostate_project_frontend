@@ -77,7 +77,7 @@ export default function PatientDashboardPage() {
         <StatCard
           label="Recommendations"
           value={String(dashboard.stats.prescriptions)}
-          sub="Automatic and clinician guidance"
+          sub="Guidance generated from your assessment"
         />
         <StatCard
           label="Last Assessment"
@@ -158,8 +158,8 @@ export default function PatientDashboardPage() {
                         }
                       >
                         {assessment.status === "confirmed"
-                          ? "Reviewed"
-                          : "Pending Review"}
+                          ? "Recommendation Ready"
+                          : "Processing"}
                       </Badge>
                     </td>
                     <td className="px-4 py-3.5">
@@ -184,8 +184,8 @@ export default function PatientDashboardPage() {
             </h3>
             <p className="mb-4 max-w-[500px] text-[0.85rem] text-ink-muted">
               Answer a structured set of questions about your symptoms and risk
-              factors. This typically takes 5–8 minutes. Your responses will be
-              reviewed by a clinician.
+              factors. This typically takes 5–8 minutes. You will receive
+              personalized recommendations immediately.
             </p>
             <Button variant="primary" href="/pre-assessment">
               Begin Pre-Assessment →
