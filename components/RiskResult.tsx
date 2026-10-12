@@ -52,7 +52,7 @@ export default function RiskResult({
           className="mb-2 font-display text-[1.6rem]"
           style={{ color: t.color }}
         >
-          {t.label} Risk
+          {t.label}
         </div>
         <div className="my-3.5 flex items-baseline gap-1">
           <div

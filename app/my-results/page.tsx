@@ -86,7 +86,7 @@ export default function MyResultsPage() {
               <div>
                 <div className="mb-1.5">
                   <Badge variant={a.tier.tier}>
-                    {a.tier.icon} {a.tier.label} Risk
+                    {a.tier.icon} {a.tier.label}
                   </Badge>
                 </div>
                 <div className="font-display text-[1.2rem] text-navy">
