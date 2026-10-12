@@ -23,7 +23,6 @@ const stats = [
 const flow = [
   { label: "Patient\nRegisters", active: false },
   { label: "Pre-\nAssessment", active: false },
-  { label: "Doctor\nReviews", active: false },
   { label: "Rx\nIssued", active: true },
 ];
 
