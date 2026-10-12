@@ -8,7 +8,20 @@ import StatCard from "@/components/StatCard";
 import Badge from "@/components/Badge";
 import Button from "@/components/Button";
 import Alert from "@/components/Alert";
-import { authApiClient, PatientDashboardResponse } from "@/lib/api";
+import {
+  authApiClient,
+  PatientAssessmentResponse,
+  PatientDashboardResponse,
+} from "@/lib/api";
+
+function getRiskAccent(
+  tier: PatientAssessmentResponse["tier"]["tier"] | undefined,
+): "danger" | "amber" | "success" | undefined {
+  if (tier === "urgent") return "danger";
+  if (tier === "high" || tier === "moderate") return "amber";
+  if (tier === "low") return "success";
+  return undefined;
+}
 
 function formatDate(ts: string) {
   return new Date(ts).toLocaleDateString("en-GB", {
@@ -71,7 +84,7 @@ export default function PatientDashboardPage() {
           label="Latest Risk Level"
           value={dashboard.stats.latestRiskLevel}
           sub="From last assessment"
-          accentColor="teal"
+          accentColor={getRiskAccent(dashboard.latestAssessment?.tier.tier)}
           small
         />
         <StatCard

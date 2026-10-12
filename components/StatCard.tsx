@@ -1,9 +1,10 @@
-type Accent = "teal" | "amber" | "danger";
+type Accent = "teal" | "amber" | "danger" | "success";
 
 const accentClasses: Record<Accent, string> = {
   teal: "text-teal",
   amber: "text-amber",
   danger: "text-danger",
+  success: "text-success",
 };
 
 export default function StatCard({
@@ -31,7 +32,9 @@ export default function StatCard({
       >
         {value}
       </div>
-      {sub && <div className="mt-[5px] text-[0.72rem] text-ink-muted">{sub}</div>}
+      {sub && (
+        <div className="mt-[5px] text-[0.72rem] text-ink-muted">{sub}</div>
+      )}
     </div>
   );
 }
