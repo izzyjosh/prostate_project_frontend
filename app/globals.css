@@ -1,28 +1,36 @@
 @import "tailwindcss";
 
 :root {
-  --navy: #1B2A4A;
-  --navy-mid: #243557;
-  --navy-light: #2E4270;
-  --teal: #0E8C75;
-  --teal-light: #12A98E;
-  --teal-dim: rgba(14, 140, 117, 0.12);
-  --sand: #F5F0E8;
-  --sand-dark: #EDE7D9;
-  --amber: #D4882A;
-  --amber-dim: rgba(212, 136, 42, 0.12);
-  --danger: #C0392B;
-  --danger-dim: rgba(192, 57, 43, 0.10);
-  --success: #1A7A54;
-  --success-dim: rgba(26, 122, 84, 0.10);
-  --text: #1B2A4A;
-  --text-mid: #4A5568;
-  --text-muted: #8896A8;
-  --border: #D8E0EC;
+  --surface: #f5f7fa;
+  --surface-alt: #e9effa;
+  --card: #ffffff;
+  --line: #dde3ec;
+  --ink: #1a2233;
+  --muted: #5e6b80;
+  --brand: #2f5bea;
+  --brand-dark: #2449c7;
+  --navy: var(--ink);
+  --navy-mid: #273451;
+  --navy-light: #354568;
+  --teal: var(--brand);
+  --teal-light: var(--brand-dark);
+  --teal-dim: rgba(47, 91, 234, 0.12);
+  --sand: var(--surface);
+  --sand-dark: var(--surface-alt);
+  --amber: #b7791f;
+  --amber-dim: rgba(183, 121, 31, 0.12);
+  --danger: #c0392b;
+  --danger-dim: rgba(192, 57, 43, 0.1);
+  --success: #18794e;
+  --success-dim: rgba(24, 121, 78, 0.1);
+  --text: var(--ink);
+  --text-mid: var(--muted);
+  --text-muted: #758197;
+  --border: var(--line);
   --radius-card: 10px;
   --radius-card-lg: 16px;
-  --shadow-card: 0 2px 20px rgba(27, 42, 74, 0.08);
-  --shadow-card-lg: 0 8px 40px rgba(27, 42, 74, 0.14);
+  --shadow-card: 0 2px 20px rgba(26, 34, 51, 0.08);
+  --shadow-card-lg: 0 8px 40px rgba(26, 34, 51, 0.14);
 }
 
 @theme inline {
@@ -60,13 +68,15 @@ html {
 }
 
 body {
-  background: var(--sand);
-  color: var(--text);
+  background: var(--surface);
+  color: var(--ink);
   font-family: var(--font-sans), sans-serif;
   line-height: 1.6;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-family: var(--font-display), serif;
   font-weight: 400;
 }

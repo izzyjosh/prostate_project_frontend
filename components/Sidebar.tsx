@@ -105,7 +105,7 @@ export default function Sidebar({
 
   return (
     <aside
-      className={`fixed left-0 top-0 z-50 flex h-screen w-[250px] flex-shrink-0 flex-col border-r border-border bg-white shadow-[8px_0_24px_rgba(27,42,74,0.08)] transition-transform duration-200 min-[681px]:translate-x-0 min-[681px]:shadow-none ${
+      className={`fixed left-0 top-0 z-50 flex h-screen w-[250px] flex-shrink-0 flex-col border-r border-border bg-white shadow-[8px_0_24px_rgba(26,34,51,0.08)] transition-transform duration-200 min-[681px]:translate-x-0 min-[681px]:shadow-none ${
         open ? "translate-x-0" : "-translate-x-full"
       }`}
     >

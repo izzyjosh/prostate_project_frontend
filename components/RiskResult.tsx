@@ -8,7 +8,7 @@ import {
 const BOX_CLASSES: Record<string, string> = {
   low: "border-success bg-success-dim",
   moderate: "border-amber bg-amber-dim",
-  high: "border-[#B36B00] bg-[rgba(212,136,42,0.15)]",
+  high: "border-amber bg-amber-dim",
   urgent: "border-danger bg-danger-dim",
 };
 

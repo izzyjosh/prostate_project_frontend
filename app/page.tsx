@@ -23,6 +23,7 @@ const stats = [
 const flow = [
   { label: "Patient\nRegisters", active: false },
   { label: "Pre-\nAssessment", active: false },
+  { label: "Doctor\nReviews", active: false },
   { label: "Rx\nIssued", active: true },
 ];
 
@@ -51,24 +52,22 @@ const stages = [
 
 export default function Home() {
   return (
-    <>
+    <div className="min-h-screen bg-white">
       <TopNav />
 
-      <section className="flex min-h-[88vh] flex-col items-center gap-[60px] bg-gradient-to-br from-navy from-55% to-navy-light px-[5%] py-20 md:flex-row md:items-center">
+      <section className="flex min-h-[88vh] flex-col items-center gap-[60px] bg-white px-[5%] py-20 md:flex-row md:items-center">
         <div className="max-w-[520px] flex-1">
-          <div className="mb-[18px] text-[0.72rem] font-semibold uppercase tracking-[0.1em] text-teal-light">
+          <div className="mb-[18px] text-[0.72rem] font-semibold uppercase tracking-[0.1em] text-teal">
             Prostate Risk Evaluation System
           </div>
-          <h1 className="mb-5 text-[clamp(2.4rem,4.5vw,3.8rem)] leading-[1.08] text-white">
+          <h1 className="mb-5 text-[clamp(2.4rem,4.5vw,3.8rem)] leading-[1.08] text-ink">
             Prostate Cancer
             <br />
-            <em className="text-teal-light not-italic italic">
-              Pre-Assessment
-            </em>
+            <em className="text-teal not-italic italic">Pre-Assessment</em>
             <br />
             Made Precise.
           </h1>
-          <p className="mb-8 max-w-[440px] text-base leading-[1.7] text-white/60">
+          <p className="mb-8 max-w-[440px] text-base leading-[1.7] text-ink-mid">
             A web-based platform that captures patient symptoms, evaluates risk
             factors, and gives patients clear, structured recommendations —
             before the consultation begins.
@@ -81,7 +80,7 @@ export default function Home() {
               Login →
             </Button>
           </div>
-          <p className="max-w-[400px] text-[0.72rem] leading-[1.5] text-white/30">
+          <p className="max-w-[400px] text-[0.72rem] leading-[1.5] text-ink-muted">
             This system supports clinical decision-making. It does not replace
             the judgement of a qualified medical professional.
           </p>
@@ -92,35 +91,33 @@ export default function Home() {
             {stats.map((s) => (
               <div
                 key={s.title}
-                className="flex items-center gap-3.5 rounded-xl border border-white/10 bg-white/[0.07] px-[18px] py-3.5 backdrop-blur-[10px]"
+                className="flex items-center gap-3.5 rounded-xl border border-border bg-white px-[18px] py-3.5 shadow-card"
               >
                 <span className="flex-shrink-0 text-[1.4rem]">{s.icon}</span>
                 <div className="flex flex-col">
-                  <strong className="text-[0.85rem] font-semibold text-white">
+                  <strong className="text-[0.85rem] font-semibold text-ink">
                     {s.title}
                   </strong>
-                  <span className="mt-px text-[0.72rem] text-white/45">
+                  <span className="mt-px text-[0.72rem] text-ink-muted">
                     {s.detail}
                   </span>
                 </div>
               </div>
             ))}
 
-            <div className="mt-1 flex items-center gap-1.5 rounded-[10px] bg-white/5 px-4 py-3.5">
+            <div className="mt-1 flex items-center gap-1.5 rounded-[10px] border border-border bg-surface-alt px-4 py-3.5">
               {flow.map((step, i) => (
                 <span key={step.label} className="contents">
                   <span
                     className={
                       "flex-1 whitespace-pre-line text-center text-[0.65rem] font-medium leading-[1.3] " +
-                      (step.active
-                        ? "font-bold text-teal-light"
-                        : "text-white/50")
+                      (step.active ? "font-bold text-teal" : "text-ink-muted")
                     }
                   >
                     {step.label}
                   </span>
                   {i < flow.length - 1 && (
-                    <span className="text-[0.7rem] text-white/25">→</span>
+                    <span className="text-[0.7rem] text-muted">→</span>
                   )}
                 </span>
               ))}
@@ -129,7 +126,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="px-[5%] py-20">
+      <section className="bg-white px-[5%] py-20">
         <div className="mb-3 text-[0.68rem] font-bold uppercase tracking-[0.12em] text-teal">
           How it works
         </div>
@@ -156,15 +153,15 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="flex flex-col items-center gap-2 bg-navy px-[5%] py-7 text-center">
-        <div className="flex items-center gap-2.5 text-sm font-semibold text-white/70">
+      <footer className="flex flex-col items-center gap-2 border-t border-border bg-white px-[5%] py-7 text-center">
+        <div className="flex items-center gap-2.5 text-sm font-semibold text-ink">
           <BrandMark small />
           <span>Prostatecare</span>
         </div>
-        <p className="text-[0.72rem] text-white/30">
+        <p className="text-[0.72rem] text-ink-muted">
           Final Year Project · Prostatecare · 2026
         </p>
       </footer>
-    </>
+    </div>
   );
 }

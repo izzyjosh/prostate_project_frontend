@@ -1,11 +1,17 @@
 import { ReactNode } from "react";
 
-type BadgeVariant = "low" | "moderate" | "high" | "urgent" | "pending" | "confirmed";
+type BadgeVariant =
+  | "low"
+  | "moderate"
+  | "high"
+  | "urgent"
+  | "pending"
+  | "confirmed";
 
 const variantClasses: Record<BadgeVariant, string> = {
   low: "bg-success-dim text-success",
   moderate: "bg-amber-dim text-amber",
-  high: "bg-[rgba(212,136,42,0.2)] text-[#B36B00]",
+  high: "bg-amber-dim text-amber",
   urgent: "bg-danger-dim text-danger",
   pending: "bg-teal-dim text-teal",
   confirmed: "bg-success-dim text-success",
