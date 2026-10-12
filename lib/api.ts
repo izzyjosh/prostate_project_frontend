@@ -97,12 +97,6 @@ export interface AdminUser {
   status: string | null;
 }
 
-export type AdminActionResponse = {
-  message: string;
-  userId: string;
-  isActive: boolean;
-};
-
 export class ApiError extends Error {
   status: number;
   data: unknown;
@@ -429,18 +423,6 @@ export class AuthApiClient extends BaseApiClient {
     );
   }
 
-  public resendVerificationEmail(email: string) {
-    return this.post<{ message: string }>(
-      "/api/auth/resend-verification-email",
-      { email },
-      { skipAuthRefresh: true },
-    );
-  }
-
-  public buildVerifyEmailUrl(token: string): string {
-    return this.buildUrl("/api/auth/verify-email", { token });
-  }
-
   public getCurrentUser() {
     return this.get<User>("/api/auth/me");
   }
@@ -507,24 +489,6 @@ export class AuthApiClient extends BaseApiClient {
 
   public getAdminAssessments() {
     return this.get<PatientAssessmentResponse[]>("/api/admin/assessments");
-  }
-
-  public suspendUser(userId: string) {
-    return this.patch<AdminActionResponse>(
-      `/api/admin/users/${userId}/suspend`,
-    );
-  }
-
-  public activateUser(userId: string) {
-    return this.patch<AdminActionResponse>(
-      `/api/admin/users/${userId}/activate`,
-    );
-  }
-
-  public deleteUser(userId: string) {
-    return this.delete<{ message: string; userId: string }>(
-      `/api/admin/users/${userId}`,
-    );
   }
 }
 
