@@ -76,15 +76,6 @@ export default function RiskResult({
           <div className="text-[0.875rem] text-ink">
             {result.automaticRecommendation}
           </div>
-          <div className="mt-3 border-t border-black/10 pt-3">
-            <div
-              className="mb-1 text-[0.68rem] font-bold uppercase tracking-[0.08em]"
-              style={{ color: t.color }}
-            >
-              Risk-tier guidance
-            </div>
-            <div className="text-[0.875rem] text-ink">{t.recommendation}</div>
-          </div>
           <div
             className="mt-2 text-[0.72rem] font-bold"
             style={{ color: t.color }}
